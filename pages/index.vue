@@ -21,7 +21,7 @@
     <section class="popular-section">
       <div class="content">
         <h3>Popular searches</h3>
-        <grid/>
+        <Grid/>
       </div>
     </section>
   </div>
@@ -81,12 +81,6 @@ export default {
         font-size: 1.6em;
         margin-bottom: 35px;
       }
-    }
-  }
-
-  @media (max-width: 1350px) {
-    .content {
-      padding: $content-padding;
     }
   }
 
