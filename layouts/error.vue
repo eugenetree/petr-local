@@ -46,6 +46,7 @@ export default {
   @import "@/assets/css/main.scss";
 
   .text-section .content {
+    margin-top: 15px;
     max-width: 600px;
     height: auto;
     h1 {
