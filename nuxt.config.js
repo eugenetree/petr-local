@@ -21,8 +21,14 @@ module.exports = {
   modules: ['@nuxtjs/style-resources'],
   styleResources: {
       scss: [
-        '~assets/scss/*.scss',
+        '~assets/css/*.scss',
       ]
+  },
+  css: [
+    '@/assets/css/body-fix.css'
+  ],
+  server: {
+    host: '0.0.0.0' // default: localhost
   },
 
   /*

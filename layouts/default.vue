@@ -16,8 +16,6 @@
       Footer
     },
     mounted() {
-      document.body.style.margin = 0;
-      document.body.style.fontFamily = `"Muli", sans-serif`;
     },
   }
 </script>

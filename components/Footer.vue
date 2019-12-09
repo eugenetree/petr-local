@@ -33,4 +33,18 @@
       }
     }
   }
+
+  @media (max-width: 1500px) {
+    .footer {
+      width: calc(100% - 40px);
+    }
+  }
+
+  @media (max-width: 450px) {
+    .footer .content{
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
 </style>

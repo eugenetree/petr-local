@@ -96,10 +96,11 @@ export default {
 
 <style lang="scss" scoped>
   .search-section {
-    height: 100vh;
+    height: calc(100vh - #{$navbar-height});
     max-height: 700px;
+    min-height: 500px;
     position: relative;
-    margin-bottom: 70px;
+    margin-bottom: 4em;
     .bg-img {
       position: absolute;
       left: 0;
@@ -130,7 +131,7 @@ export default {
   }
 
   .popular-section {
-    margin-bottom: 70px;
+    margin-bottom: 4em;
     .content {
       h3 {
         font-size: 1.6em;
@@ -197,7 +198,7 @@ export default {
 
   @media (max-width: 1350px) {
     .content {
-      padding: 0 20px;
+      padding: $content-padding;
     }
   }
 

@@ -13,6 +13,7 @@
 
 <style lang="scss" scoped>
   .logo {
+    display: flex;
     font-family: $logo-font;
   }
 </style>
