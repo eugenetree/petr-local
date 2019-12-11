@@ -3,12 +3,12 @@
     <div class="content">
       <nuxt-link to="/"><Logo fontSize='1.5em'/></nuxt-link>
       <div class="menu-list" ref="menuList" v-click-outside="closeMenu">
-        <nuxt-link class="menu-item" to="/">Home</nuxt-link>
-        <nuxt-link class="menu-item" to="/">Travel Insurance</nuxt-link>
-        <nuxt-link class="menu-item" to="/">About Us</nuxt-link>
-        <nuxt-link class="menu-item" to="/">Contact Us</nuxt-link>
-        <nuxt-link class="menu-item" to="/">Blog</nuxt-link>
-        <nuxt-link class="menu-item" to="/1">Error</nuxt-link>
+        <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Home</nuxt-link>
+        <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Travel Insurance</nuxt-link>
+        <nuxt-link class="menu-item" to="/" @click.native="closeMenu">About Us</nuxt-link>
+        <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Contact Us</nuxt-link>
+        <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Blog</nuxt-link>
+        <nuxt-link class="menu-item" to="/1" @click.native="closeMenu">Error</nuxt-link>
       </div>
       <div class="burger" :class="{'burger-is-opened': burgerIsOpened}" @click="toggleMenu">
         <span></span>
@@ -50,6 +50,7 @@
         }, this.burger.duration);
       },
       closeMenu(e) {
+        console.log('close')
         if (e.target.closest('.burger') || this.burger.animating) return;
         this.burgerIsOpened = false;
         this.burger.animating = true;
