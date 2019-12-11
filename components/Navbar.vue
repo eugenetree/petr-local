@@ -1,13 +1,14 @@
 <template>
   <div class="navbar">
     <div class="content">
-      <Logo fontSize='1.5em'/>
+      <nuxt-link to="/"><Logo fontSize='1.5em'/></nuxt-link>
       <div class="menu-list" ref="menuList" v-click-outside="closeMenu">
         <nuxt-link class="menu-item" to="/">Home</nuxt-link>
         <nuxt-link class="menu-item" to="/">Travel Insurance</nuxt-link>
         <nuxt-link class="menu-item" to="/">About Us</nuxt-link>
         <nuxt-link class="menu-item" to="/">Contact Us</nuxt-link>
         <nuxt-link class="menu-item" to="/">Blog</nuxt-link>
+        <nuxt-link class="menu-item" to="/1">Error</nuxt-link>
       </div>
       <div class="burger" :class="{'burger-is-opened': burgerIsOpened}" @click="toggleMenu">
         <span></span>
