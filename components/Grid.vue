@@ -2,56 +2,56 @@
         <div class="grid">
           <div class="grid-item overlay">
             <div class="bg-img">
-              <img src="/home/popular-1.png" alt="">
+              <img src="~assets/img/home/popular-1.png" alt="">
             </div>
             <span class="top">Safety in</span>
             <span class="bottom">Costa Rica</span>
           </div>
          <div class="grid-item overlay">
             <div class="bg-img">
-              <img src="/home/popular-1.png" alt="">
+              <img src="~assets/img/home/popular-1.png" alt="">
             </div>
             <span class="top">Safety in</span>
             <span class="bottom">Costa Rica</span>
           </div>
            <div class="grid-item overlay">
             <div class="bg-img">
-              <img src="/home/popular-1.png" alt="">
+              <img src="~assets/img/home/popular-1.png" alt="">
             </div>
             <span class="top">Safety in</span>
             <span class="bottom">Costa Rica</span>
           </div>
            <div class="grid-item overlay">
             <div class="bg-img">
-              <img src="/home/popular-1.png" alt="">
+              <img src="~assets/img/home/popular-1.png" alt="">
             </div>
             <span class="top">Safety in</span>
             <span class="bottom">Costa Rica</span>
           </div>
            <div class="grid-item overlay">
             <div class="bg-img">
-              <img src="/home/popular-1.png" alt="">
+              <img src="~assets/img/home/popular-1.png" alt="">
             </div>
             <span class="top">Safety in</span>
             <span class="bottom">Costa Rica</span>
           </div>
            <div class="grid-item overlay">
             <div class="bg-img">
-              <img src="/home/popular-1.png" alt="">
+              <img src="~assets/img/home/popular-1.png" alt="">
             </div>
             <span class="top">Safety in</span>
             <span class="bottom">Costa Rica</span>
           </div>
            <div class="grid-item overlay">
             <div class="bg-img">
-              <img src="/home/popular-1.png" alt="">
+              <img src="~assets/img/home/popular-1.png" alt="">
             </div>
             <span class="top">Safety in</span>
             <span class="bottom">Costa Rica</span>
           </div>
            <div class="grid-item overlay">
             <div class="bg-img">
-              <img src="/home/popular-1.png" alt="">
+              <img src="~assets/img/home/popular-1.png" alt="">
             </div>
             <span class="top">Safety in</span>
             <span class="bottom">Costa Rica</span>

@@ -8,7 +8,7 @@
        <l-icon
           :icon-size="[20,30]"
           :icon-anchor="[20,20]"
-          icon-url="/map/icon.png"
+          icon-url="~assets/img/map/icon.png"
         />
       <l-popup :content="'<ul><li>123</li><li>123</li><li>123</li><li>123</li><li>123</li><li>123</li><li>123</li></ul>'" ></l-popup>
      </l-marker>

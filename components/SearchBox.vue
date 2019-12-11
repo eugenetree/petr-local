@@ -3,7 +3,7 @@
     <input type="text" placeholder="Type in and select your destination from the list ">
     <button>search</button>
     <div class="search-icon">
-      <img src="/search.png" alt="">
+      <img src="~assets/img/search.png" alt="">
     </div>
   </div>
 </template>

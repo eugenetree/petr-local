@@ -16,6 +16,7 @@
     "@nuxtjs/style-resources": "^1.0.0",
     "gsap": "^3.0.2",
     "nuxt": "^2.0.0",
+    "nuxt-imagemin": "^1.0.0",
     "nuxt-leaflet": "0.0.19",
     "v-click-outside": "^3.0.0",
     "vue2-leaflet": "^2.2.1"

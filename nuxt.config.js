@@ -18,7 +18,7 @@ module.exports = {
     }
   },
 
-  modules: ['@nuxtjs/style-resources', 'nuxt-leaflet'],
+  modules: ['@nuxtjs/style-resources', 'nuxt-leaflet', 'nuxt-imagemin'],
   styleResources: {
       scss: [
         '~assets/css/*.scss',

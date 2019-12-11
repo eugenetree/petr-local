@@ -2,7 +2,7 @@
   <div>
     <section class="search-section">
       <div class="bg-img overlay">
-        <img src="/home/bg-main.png" alt="">
+        <img src="~assets/img/home/bg-main.png" alt="">
       </div>
       <div class="content">
         <h2 class="title white">
