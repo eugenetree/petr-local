@@ -50,7 +50,6 @@
         }, this.burger.duration);
       },
       closeMenu(e) {
-        console.log('close')
         if (e.target.closest('.burger') || this.burger.animating) return;
         this.burgerIsOpened = false;
         this.burger.animating = true;

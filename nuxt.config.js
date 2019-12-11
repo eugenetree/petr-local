@@ -25,7 +25,11 @@ module.exports = {
       ]
   },
   css: [
-    '@/assets/css/body-fix.css'
+    '@/assets/css/body-fix.css',
+    '@fortawesome/fontawesome-svg-core/styles.css'
+  ],
+  plugins: [
+    '~/plugins/fontawesome.js'
   ],
   server: {
     host: '0.0.0.0' // default: localhost
