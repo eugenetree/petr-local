@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <input type="text" placeholder="Type in and select your destination from the list ">
-    <button>search</button>
+    <button>Search</button>
     <div class="search-icon">
       <img src="~assets/img/search.png" alt="">
     </div>
@@ -20,7 +20,7 @@
     height: 68px;
     position: relative;
     input {
-      border: 1px solid $dark-grey;
+      border: 1px solid #e4e4e4;
       font-size: 1.125em;
       font-family: 'Muli', sans-serif;
       height: 100%;
@@ -32,13 +32,17 @@
       }
     }
     button {
+      cursor: pointer;
       font-size: 1.25em;
       font-weight: bold;
-      text-transform: uppercase;
       color: $white;
       width: 190px;
       padding: 0 50px;
       background-color: $green;
+      transition: .2s;
+      &:hover {
+        background-color: $green-hover;
+      }
     }
     .search-icon {
       display: none;

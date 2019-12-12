@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="error-section">
     <section class="text-section">
       <div class="content">
         <h1>Sorry, we are not there yet <span class="green">:(</span>  </h1>
@@ -29,7 +29,7 @@
         <Grid/>
       </div>
     </section>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -45,19 +45,30 @@ export default {
 <style lang="scss" scoped>
   @import "@/assets/css/main.scss";
 
+  .error-section {
+    color: $dark;
+  }
+
   .text-section .content {
-    margin-top: 15px;
-    max-width: 600px;
+    max-width: 580px;
     height: auto;
+    margin-top: 110px;
+    .desc, ol li {
+      line-height: 1.75em;
+      letter-spacing: .185px;
+    }
     h1 {
       font-size: 2.6em;
-      margin-bottom: .2em;
+      margin-bottom: .3em;
+      font-weight: 700;
     }
     .desc {
       margin-bottom: 1.5em;
     }
     h3 {
+      font-size: 1.7em;
       margin-bottom: .7rem;
+      font-weight: 700;
     }
     ol {
       padding-left: 0;
@@ -65,11 +76,17 @@ export default {
       counter-reset: counter;
       margin-bottom: 3em;
       li {
+        position: relative;
         counter-increment: counter;
+        padding-left: 20px;
+        margin-bottom: 5px;
         &::before {
           content: counter(counter) ". ";
           color: $green;
           font-weight: bold;
+          position: absolute;
+          left: 0;
+          top: 0;
         }
       }
     }
@@ -92,6 +109,9 @@ export default {
   } 
 
   @media (max-width: 800px) {
+    .text-section .content {
+      margin-top: 15px;
+    }
     .popular-section .content{
       h3 {
         margin-bottom: 15px;

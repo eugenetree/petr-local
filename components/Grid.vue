@@ -75,6 +75,8 @@
           position: relative;
           height: 340px;
           width: calc((100% - 75px) / 4);
+          border-radius: 6px;
+          overflow: hidden;
           display: flex;
           flex-direction: column;
           justify-content: center;

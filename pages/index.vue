@@ -5,16 +5,19 @@
         <img src="~assets/img/home/bg-main.png" alt="">
       </div>
       <div class="content">
-        <h2 class="title white">
-          Check for unsafe spots at your destination
-        </h2>
-        <SearchBox/>
-        <div class="hint">
-          <span class="white">Or search by</span>
-          <span class="green"> continents, countries, regions</span>
-          <span class="white"> and</span>
-          <span class="green"> cities.</span>
+        <div class="wrapper">
+          <h2 class="title white">
+            Check for unsafe spots at your destination
+          </h2>
+          <SearchBox/>
+          <div class="hint">
+            <span class="white">Or search by</span>
+            <span class="green"> continents, countries, regions</span>
+            <span class="white"> and</span>
+            <span class="green"> cities.</span>
+          </div>
         </div>
+        
       </div>
     </section>
 
@@ -63,14 +66,21 @@ export default {
       align-items: left;
       width: 100%;
       max-width: 800px;
-      .title {
-        font-size: 2.5em;
-        font-weight: 600;
-        margin-bottom: 15px;
+      .wrapper {
+        position: relative;
+        .title {
+          position: absolute;
+          top: calc(-100% - 40px);
+          font-size: 2.5em;
+          font-weight: 600;
+          line-height: 1.1em;
+        }
+        .hint {
+          position: absolute;
+          margin-top: 15px;
+        }
       }
-      .hint {
-        margin-top: 15px;
-      }
+
     }
   }
 
@@ -80,6 +90,22 @@ export default {
       h3 {
         font-size: 1.6em;
         margin-bottom: 35px;
+      }
+    }
+  }
+
+  @media (max-width: 950px) {
+    .search-section .content {
+      .wrapper {
+        .title, .hint {
+          position: relative;
+          top: 0;
+          left: 0;
+        }
+        .title {
+          margin-bottom: 12px;
+          line-height: auto;
+        }
       }
     }
   }

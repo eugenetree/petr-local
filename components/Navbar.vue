@@ -83,6 +83,7 @@
 
   .navbar {
     height: $navbar-height;
+    border-bottom: 2px solid $light-grey;
     .content {
       display: flex;
       justify-content: space-between;
@@ -93,8 +94,12 @@
       .menu-item {
         color: $dark;
         margin-right: 1.8em;
+        transition: .2s;
         &:last-child {
           margin-right: 0;
+        }
+        &:hover {
+          color: $green-hover;
         }
       }
     }

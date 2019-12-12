@@ -14,6 +14,8 @@
 <style lang="scss" scoped>
   .logo {
     display: flex;
+    font-weight: 600;
     font-family: $logo-font;
+    letter-spacing: -.5px;
   }
 </style>
