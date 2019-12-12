@@ -20,7 +20,7 @@
     position: relative;
     width: fit-content;
     color: $green;
-    font-size: 20px;
+    font-size: 15px;
   }
 
   .front {
@@ -32,7 +32,7 @@
     width: 100%;
     svg {
       position: absolute;
-      top: 3.5px;
+      top: 2.5px;
       &:nth-child(1) {
         left: 0;
       }

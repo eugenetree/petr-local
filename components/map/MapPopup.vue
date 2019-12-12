@@ -1,12 +1,16 @@
 <template>
   <div>
     <span class="popup-title">Hotel Ebersbach</span>
-    <Rating class="rating" :value="88"/>
-    <span class="rating-title">(Hotel rating)</span>
-    <Rating class="rating" :value="66"/>
-    <span class="rating-title">(Location rating)</span>
+    <div>
+      <Rating class="rating" :value="88"/>
+      <span class="rating-title">(Hotel rating)</span>
+    </div>
+    <div>
+      <Rating class="rating" :value="66"/>
+      <span class="rating-title">(Location rating)</span>
+    </div>
     <span class="rating-money">$$$</span>
-    <button class="show-info">show information and prices</button>
+    <button class="show-info">Show information and prices</button>
   </div>
 </template>
 
@@ -43,13 +47,16 @@
     color: $dark;
   }
   .show-info {
-    text-transform: uppercase;
     background-color: $green;
     font-size: 12px;
     font-weight: 600;
     font-family: $main-font;
     color: $white;
-    width: 100%;
     padding: 7px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
   }
+</style>
+
+.<style lang="scss">
 </style>
