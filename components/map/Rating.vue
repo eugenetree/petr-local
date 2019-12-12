@@ -3,8 +3,8 @@
     <div class="back">
       <font-awesome-icon :icon="['far', 'star']" v-for="item in 5" :key="item"/>
     </div>
-    <div class="front" :style="{width: value + 'px'}">
-        <font-awesome-icon :icon="['fas', 'star']" v-for="item in 5" :key="item"/>
+    <div class="front" :style="{width: value + '%'}">
+      <font-awesome-icon :icon="['fas', 'star']" v-for="item in 5" :key="item"/>
     </div>
   </div>
 </template>
@@ -20,6 +20,7 @@
     position: relative;
     width: fit-content;
     color: $green;
+    font-size: 20px;
   }
 
   .front {
@@ -31,7 +32,7 @@
     width: 100%;
     svg {
       position: absolute;
-      top: 2px;
+      top: 3.5px;
       &:nth-child(1) {
         left: 0;
       }
