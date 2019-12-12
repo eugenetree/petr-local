@@ -2,10 +2,11 @@
   <div>
     <div id="map-wrap">
       <client-only>
-        <l-map :zoom=13 :center="[47.413220, -1.219482]">
+        <l-map :zoom=13 :center="[47, -1]">
           <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-          <div class="markers_wrap">
-            <l-marker @popupopen="console" :zIndexOffset="1" :lat-lng="[47.413220, -1.219482]" :draggable="true" @move="console">
+
+          <div class="markers-wrap" v-for="(item, index) in coords" :key="index">
+            <l-marker :key="index" @popupopen="circleHandler($event, {id: index, display: true})" @popupclose="circleHandler($event, {id: index, display: false})" :zIndexOffset="1" :lat-lng="item.latLng" :draggable="true">
             <l-icon
                 :icon-size="[30,37]"
                 :icon-anchor="[14,0]"
@@ -16,15 +17,15 @@
             </l-popup>
           </l-marker>
 
-          <l-marker :lat-lng="[47.413220, -1.219482]" :draggable="true" @move="console">
-            <l-icon
-              :icon-size="[50,50]"
-              :icon-anchor="[24,0]"
-            >
-              <div class="bg-icon">
-              </div>
-            </l-icon>
-          </l-marker>
+            <l-marker :key="index + 'circle'" :lat-lng="item.latLng" :draggable="true">
+                <l-icon
+                  :icon-size="[50,50]"
+                  :icon-anchor="[24,0]"
+                >
+                <div class="bg-icon" :data-id="index">
+                </div>
+              </l-icon>
+            </l-marker>
           </div>
           
         </l-map>
@@ -36,28 +37,39 @@
 <script>
   import gsap from 'gsap'
   import MapPopup from '@/components/map/MapPopup.vue'
+import { setInterval } from 'timers';
 
   export default {
     components: {
       MapPopup
     },
+    data() {
+      return {
+        coords: [
+          {
+            latLng: [47, -1],
+          },
+          {
+            latLng: [47.2, -1],
+          }
+        ]
+      }
+    },
     methods: {
-      console(e) {
+      circleHandler(e, payload) {
+        console.log(e.popup._source.getElement());
         let marker = e.popup._source.getElement()
-        console.log(marker.nextElementSibling.querySelector('.bg-icon'))
-        // let transform = marker.style.transform;
-        // let left = +transform.split('p')[0].split('(')[1]
-        // let top = parseInt(transform.split(',')[1])
-        // let circle = document.createElement('div');
-        // circle.classList.add('custom-circle');
-        // circle.style.left = left - 25 + 'px';
-        // circle.style.top = top - 6 + 'px';
-        // marker.parentNode.appendChild(circle);
+        let circle = marker.parentNode.querySelector(`.bg-icon[data-id='${payload.id}']`);
+
+        if (payload.display) gsap.fromTo(circle, {autoAlpha: 0}, {autoAlpha: 1, duration: .5})
+        else gsap.fromTo(circle, {autoAlpha: 1}, {autoAlpha: 0, duration: .5})
       },
           close(e) {
       console.log(e.popup._source.getElement())
     }
-    },
+  },
+  mounted() {
+  },
 
   }
 </script>
@@ -75,5 +87,6 @@
     background: radial-gradient($green, rgba(53,205,184,.2));
     border-radius: 50%;
     border: 2px dashed $green;
+    opacity: 0;;
   }
 </style>
