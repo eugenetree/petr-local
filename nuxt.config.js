@@ -26,10 +26,12 @@ module.exports = {
   },
   css: [
     '@/assets/css/body-fix.css',
-    '@fortawesome/fontawesome-svg-core/styles.css'
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    { src: 'slick-carousel/slick/slick.css', lang: 'css' }
   ],
   plugins: [
-    '~/plugins/fontawesome.js'
+    '~/plugins/fontawesome.js',
+    { src: "~plugins/slick-slide.js", ssr: false }
   ],
   server: {
     host: '0.0.0.0' // default: localhost

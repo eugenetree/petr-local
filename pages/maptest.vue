@@ -1,7 +1,29 @@
 <template>
-  <div>
+  <div style="width: 50%">
+     <client-only>
+		<slick-slide 
+    class="test"
+			ref="slick"
+			:options="slickOptions">
+		  <img src="@/assets/img/map/slide-1.png" alt="">
+			<img src="@/assets/img/map/slide-2.png" alt="">
+			<img src="@/assets/img/map/slide-3.png" alt="">
+			<img src="@/assets/img/map/slide-4.png" alt="">
+			<img src="@/assets/img/map/slide-5.png" alt="">
+		</slick-slide>
+
+    <slick-slide 
+    class="testt"
+			:options="slickOptions2">
+		  <img src="@/assets/img/map/slide-1.png" alt="">
+			<img src="@/assets/img/map/slide-2.png" alt="">
+			<img src="@/assets/img/map/slide-3.png" alt="">
+			<img src="@/assets/img/map/slide-4.png" alt="">
+			<img src="@/assets/img/map/slide-5.png" alt="">
+		</slick-slide>
+	</client-only>
     <div id="map-wrap">
-      <client-only>
+      <!-- <client-only>
         <l-map :zoom=13 :center="[47, -1]">
           <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
 
@@ -29,22 +51,37 @@
           </div>
           
         </l-map>
-      </client-only>
+      </client-only> -->
+      <Map :coords="coords"/>
     </div>
   </div>
 </template>
 
 <script>
   import gsap from 'gsap'
-  import MapPopup from '@/components/map/MapPopup.vue'
-import { setInterval } from 'timers';
+  // import MapPopup from '@/components/map/MapPopup.vue'
+  import Map from '@/components/map/Map.vue'
 
   export default {
     components: {
-      MapPopup
+      // MapPopup,
+      Map
     },
     data() {
       return {
+        slickOptions: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          asNavFor: '.testt',
+          arrows: false,
+        },
+                slickOptions2: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          asNavFor: '.test',
+          arrows: false,
+          focusOnSelect: true
+			  },
         coords: [
           {
             latLng: [47, -1],
@@ -88,5 +125,25 @@ import { setInterval } from 'timers';
     border-radius: 50%;
     border: 2px dashed $green;
     opacity: 0;;
+  }
+
+  .testt {
+    .slick-slide {
+      height:200px;
+    }
+
+    .slick-slide img {
+      height:200px;
+    }
+  }
+
+  .test {
+    .slick-slide {
+      height:500px;
+    }
+
+    .slick-slide img {
+      height:500px;
+    }
   }
 </style>
