@@ -9,6 +9,8 @@
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Contact Us</nuxt-link>
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Blog</nuxt-link>
         <nuxt-link class="menu-item" to="/1" @click.native="closeMenu">Error</nuxt-link>
+        <nuxt-link class="menu-item" to="/cyprus">How Safe Page</nuxt-link>
+        <nuxt-link class="menu-item" to="/safety">Safety Page</nuxt-link>
       </div>
       <div class="burger" :class="{'burger-is-opened': burgerIsOpened}" @click="toggleMenu">
         <span></span>

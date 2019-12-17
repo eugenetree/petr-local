@@ -26,6 +26,7 @@
 <style lang="scss" scoped>
   .rating {
     display: inline-block;
+    margin-bottom: 5px;
   }
 
   .popup-title {
@@ -33,6 +34,7 @@
     font-weight: 600;
     font-family: $main-font;
     font-size: 16px;
+    margin-bottom: 5px;
   }
   .rating-title {
     color: $dark-grey;
@@ -45,6 +47,7 @@
     font-weight: bold;
     font-family: $main-font;
     color: $dark;
+    margin-bottom: 10px;
   }
   .show-info {
     background-color: $green;
@@ -55,6 +58,7 @@
     padding: 7px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    width: 100%;
   }
 </style>
 
@@ -64,7 +68,7 @@
     height: 100%;
     background: radial-gradient($green, rgba(53,205,184,.2));
     border-radius: 50%;
-    border: 2px dashed $green;
+    border: 1px dashed $green;
     opacity: 0;;
   }
 </style>

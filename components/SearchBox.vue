@@ -18,6 +18,7 @@
   .search-box {
     display: flex;
     height: 68px;
+    width: 100%;
     position: relative;
     input {
       border: 1px solid #e4e4e4;

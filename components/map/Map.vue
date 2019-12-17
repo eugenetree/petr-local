@@ -2,9 +2,8 @@
     <client-only>
         <l-map :zoom="zoom" :center="center">
           <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-
           <div class="markers-wrap" v-for="(item, index) in coords" :key="index">
-            <l-marker :key="index" @popupopen="circleHandler($event, {id: index, display: true})" @popupclose="circleHandler($event, {id: index, display: false})" :zIndexOffset="1" :lat-lng="item.latLng" :draggable="true">
+            <l-marker :key="index" @popupopen="circleHandler($event, {id: index, display: true})" @popupclose="circleHandler($event, {id: index, display: false})" :zIndexOffset="1" :lat-lng="item.latLng">
             <l-icon
                 :icon-size="[30,37]"
                 :icon-anchor="[14,0]"
@@ -15,7 +14,7 @@
             </l-popup>
           </l-marker>
 
-            <l-marker :key="index + 'circle'" :lat-lng="item.latLng" :draggable="true">
+            <l-marker :key="index + 'circle'" :lat-lng="item.latLng">
                 <l-icon
                   :icon-size="[50,50]"
                   :icon-anchor="[24,0]"
