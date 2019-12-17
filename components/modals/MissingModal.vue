@@ -50,6 +50,7 @@
       background-color: $green;
       color: $white;
       border-radius: 8px;
+      cursor: pointer;
     }
   }
 </style>
