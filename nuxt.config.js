@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     '~/plugins/fontawesome.js',
     { src: "~plugins/slick-slide.js", ssr: false },
-    // "~plugins/modal.js"
+    "~plugins/modal.js"
   ],
   server: {
     host: '0.0.0.0' // default: localhost

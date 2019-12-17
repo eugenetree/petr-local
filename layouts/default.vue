@@ -3,20 +3,20 @@
     <Navbar/>
     <Nuxt/>
     <Footer/>
-    <!-- <MissingModal/> -->
+    <MissingModal/>
   </div>
 </template>
 
 <script>
   import Navbar from '@/components/Navbar.vue'
   import Footer from '@/components/Footer.vue'
-  // import MissingModal from '@/components/modals/MissingModal.vue'
+  import MissingModal from '@/components/modals/MissingModal.vue'
 
   export default {
     components: {
       Navbar,
       Footer,
-      // MissingModal
+      MissingModal
     },
     mounted() {
       // this.$modal.show('missing')
