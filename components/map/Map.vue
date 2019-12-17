@@ -1,6 +1,6 @@
 <template>
     <client-only>
-        <l-map :zoom=13 :center="[47, -1]">
+        <l-map :zoom="zoom" :center="center">
           <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
 
           <div class="markers-wrap" v-for="(item, index) in coords" :key="index">
@@ -25,7 +25,6 @@
               </l-icon>
             </l-marker>
           </div>
-          
         </l-map>
     </client-only>
 </template>
@@ -37,7 +36,7 @@
     components: {
       MapPopup
     },
-    props: ['coords'],
+    props: ['coords', 'center', 'zoom'],
     methods: {
       circleHandler(e, payload) {
         console.log(e.popup._source.getElement());

@@ -1,59 +1,76 @@
 <template>
-  <div style="width: 50%">
-     <client-only>
-		<slick-slide 
-    class="test"
-			ref="slick"
-			:options="slickOptions">
-		  <img src="@/assets/img/map/slide-1.png" alt="">
-			<img src="@/assets/img/map/slide-2.png" alt="">
-			<img src="@/assets/img/map/slide-3.png" alt="">
-			<img src="@/assets/img/map/slide-4.png" alt="">
-			<img src="@/assets/img/map/slide-5.png" alt="">
-		</slick-slide>
+  <div>
+    <section class="slider-map-section">
+      <div class="content">
+        <h1>How safe is Cyprus</h1>
+        <div class="flex">
+          <div class="slider">
+            <client-only>
+              <slick-slide 
+                class="slider-main"
+                ref="slick"
+                :options="sliderMainOpt">
+                <img src="@/assets/img/map/slide-1.png" alt="">
+                <img src="@/assets/img/map/slide-2.png" alt="">
+                <img src="@/assets/img/map/slide-3.png" alt="">
+                <img src="@/assets/img/map/slide-4.png" alt="">
+                <img src="@/assets/img/map/slide-5.png" alt="">
+              </slick-slide>
 
-    <slick-slide 
-    class="testt"
-			:options="slickOptions2">
-		  <img src="@/assets/img/map/slide-1.png" alt="">
-			<img src="@/assets/img/map/slide-2.png" alt="">
-			<img src="@/assets/img/map/slide-3.png" alt="">
-			<img src="@/assets/img/map/slide-4.png" alt="">
-			<img src="@/assets/img/map/slide-5.png" alt="">
-		</slick-slide>
-	</client-only>
-    <div id="map-wrap">
-      <!-- <client-only>
-        <l-map :zoom=13 :center="[47, -1]">
-          <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-
-          <div class="markers-wrap" v-for="(item, index) in coords" :key="index">
-            <l-marker :key="index" @popupopen="circleHandler($event, {id: index, display: true})" @popupclose="circleHandler($event, {id: index, display: false})" :zIndexOffset="1" :lat-lng="item.latLng" :draggable="true">
-            <l-icon
-                :icon-size="[30,37]"
-                :icon-anchor="[14,0]"
-                :icon-url="require('assets/img/map/icon.png')"
-              />
-            <l-popup>
-              <MapPopup/>
-            </l-popup>
-          </l-marker>
-
-            <l-marker :key="index + 'circle'" :lat-lng="item.latLng" :draggable="true">
-                <l-icon
-                  :icon-size="[50,50]"
-                  :icon-anchor="[24,0]"
-                >
-                <div class="bg-icon" :data-id="index">
-                </div>
-              </l-icon>
-            </l-marker>
+              <slick-slide 
+                class="slider-sub"
+                :options="sliderSubOpt">
+                <img src="@/assets/img/map/slide-1.png" alt="">
+                <img src="@/assets/img/map/slide-2.png" alt="">
+                <img src="@/assets/img/map/slide-3.png" alt="">
+                <img src="@/assets/img/map/slide-4.png" alt="">
+                <img src="@/assets/img/map/slide-5.png" alt="">
+              </slick-slide>
+            </client-only>
           </div>
-          
-        </l-map>
-      </client-only> -->
-      <Map :coords="coords"/>
-    </div>
+          <div class="map">
+            <Map :center="[35, 33]" :zoom="8"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="text-section">
+      <div class="content">
+        <h2>How safe is Cyprus</h2>
+        <p>
+          Street crime is low risk and incidents happen very rarely. But travellers should 
+          take extra care when in unfamiliar neighbourhoods or venturing away from 
+          main tourist tracks. In the past, when muggings have occurred, the assailants 
+          have been unarmed. Armed robberies are more common on the Turkish side in 
+          the North, whilst being very rare in the South.
+
+          Pickpocketing however, can be a problem in many of the busy tourist areas. 
+          Whilst it’s not an overly common occurrence, it does happen, as with any 
+          holiday destination in the world. So it is advised that money and valuables are 
+          kept out of view, and expensive jewellery and watches are left at home.
+
+          Scams can also be an issue if you’re not careful. The risk of this increases 
+          during peak tourist periods, such as the busy summer season. Try to negotiate 
+          trips, excursions and travel in advance if possible, or book activities and taxis 
+          with your hotel. It can be tempting to go for the cheapest prices on the street, 
+          but organising everything through your hotel ensures that you are dealing with 
+          official companies.
+
+          Other common scams that you may come across on the street include inferior 
+          quality cigarettes (often sold in genuine-looking multipacks) and nightclub and 
+          cabaret scams that lure you into a venue with promises of entertainment and 
+          great food, but the reality is quite the opposite. To avoid being tricked to part 
+          with your cash, do your research before you head out for the night.
+        </p>
+      </div>
+    </section>
+
+    <section class="search-section">
+      <div class="map">
+        <Map :center="[35, 33]" :zoom="8"/>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -69,16 +86,16 @@
     },
     data() {
       return {
-        slickOptions: {
+        sliderMainOpt: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          asNavFor: '.testt',
+          asNavFor: '.slider-sub',
           arrows: false,
         },
-                slickOptions2: {
-          slidesToShow: 4,
+        sliderSubOpt: {
+          slidesToShow: 5,
           slidesToScroll: 1,
-          asNavFor: '.test',
+          asNavFor: '.slider-main',
           arrows: false,
           focusOnSelect: true
 			  },
@@ -118,32 +135,41 @@
 </style>
 
 <style lang="scss">
-  .bg-icon {
-    width: 100%;
-    height: 100%;
-    background: radial-gradient($green, rgba(53,205,184,.2));
-    border-radius: 50%;
-    border: 2px dashed $green;
-    opacity: 0;;
+  .slider-map-section {
+    .slider-sub {
+      .slick-slide {
+        height:100px;
+      }
+
+      .slick-slide img {
+        height:100px;
+      }
+    }
+
+    .slider-main {
+      .slick-slide {
+        height:360px;
+      }
+
+      .slick-slide img {
+        height:360px;
+      }
+    }
+
+    .content {
+      .slider {
+        width: 60%;
+      }
+      .map {
+        width: 40%;
+      }
+    }
   }
 
-  .testt {
-    .slick-slide {
-      height:200px;
-    }
-
-    .slick-slide img {
-      height:200px;
-    }
-  }
-
-  .test {
-    .slick-slide {
-      height:500px;
-    }
-
-    .slick-slide img {
-      height:500px;
+  .search-section {
+    .map {
+      height: 650px;
+      width: 100%;    
     }
   }
 </style>

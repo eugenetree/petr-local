@@ -46,6 +46,10 @@ img {
   color: $white;
 }
 
+.flex {
+  display: flex;
+}
+
 .overlay {
   &::after {
     content: '';
