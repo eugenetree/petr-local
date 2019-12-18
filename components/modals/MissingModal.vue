@@ -24,7 +24,7 @@
 
 <style lang="scss" >
   .modal {
-    z-index: 1000;
+    z-index: 1000 !important;
   }
 
   .modal .v--modal-box {
