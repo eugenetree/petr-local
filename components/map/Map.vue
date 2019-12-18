@@ -38,12 +38,12 @@
     props: ['coords', 'center', 'zoom'],
     methods: {
       circleHandler(e, payload) {
-        console.log(e.popup._source.getElement());
-        let marker = e.popup._source.getElement()
-        let circle = marker.parentNode.querySelector(`.bg-icon[data-id='${payload.id}']`);
+        // console.log(e.popup._source.getElement());
+        // let marker = e.popup._source.getElement()
+        // let circle = marker.parentNode.querySelector(`.bg-icon[data-id='${payload.id}']`);
 
-        if (payload.display) gsap.fromTo(circle, {autoAlpha: 0}, {autoAlpha: 1, duration: .5})
-        else gsap.fromTo(circle, {autoAlpha: 1}, {autoAlpha: 0, duration: .5})
+        // if (payload.display) gsap.fromTo(circle, {autoAlpha: 0}, {autoAlpha: 1, duration: .5})
+        // else gsap.fromTo(circle, {autoAlpha: 1}, {autoAlpha: 0, duration: .5})
       },
           close(e) {
       console.log(e.popup._source.getElement())
@@ -55,6 +55,13 @@
   }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+  .bg-icon {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient($green, rgba(53,205,184,.2));
+    border-radius: 50%;
+    border: 1px dashed $green;
+    // opacity: 0;
+  }
 </style>

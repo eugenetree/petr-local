@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <div class="content">
-      <Logo/>
+      <nuxt-link to="/"><Logo/></nuxt-link>
       <span class="rights">© 2020 Stay.in All rights reserved</span>
     </div>
   </div>

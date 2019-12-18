@@ -1,6 +1,6 @@
 <template>
   <div>
-    <modal class="modale" height="auto" width="90%" :max-width="380" :adaptive="true" name="missing">
+    <modal class="modal" height="auto" width="90%" :max-width="380" :adaptive="true" name="missing">
       <h1 class="green">Missing anything?</h1>
       <p>
         We are still developing the product and 
@@ -23,7 +23,11 @@
 </script>
 
 <style lang="scss" >
-  .modale .v--modal-box {
+  .modal {
+    z-index: 1000;
+  }
+
+  .modal .v--modal-box {
     padding: 1.9em;
     display: flex;
     flex-direction: column;

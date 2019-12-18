@@ -67,6 +67,7 @@ export default {
       width: 100%;
       max-width: 800px;
       .wrapper {
+        width: 100%;
         position: relative;
         .title {
           position: absolute;

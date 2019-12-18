@@ -63,12 +63,5 @@
 </style>
 
 .<style lang="scss">
-  .bg-icon {
-    width: 100%;
-    height: 100%;
-    background: radial-gradient($green, rgba(53,205,184,.2));
-    border-radius: 50%;
-    border: 1px dashed $green;
-    opacity: 0;;
-  }
+
 </style>

@@ -38,6 +38,7 @@
       font-weight: bold;
       color: $white;
       width: 190px;
+      height: 100%;
       padding: 0 50px;
       background-color: $green;
       transition: .2s;
