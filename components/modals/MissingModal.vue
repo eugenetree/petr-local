@@ -8,10 +8,10 @@
         state as well as future features you 
         would like to see.
         <br><br>
-        Please email us at xxx@xxx.xx with any 
+        Please email us at hello@safelocation.in with any 
         concerns you might have.
       </p>
-      <button>Get in touch with us</button>
+      <a class="get-in-touch" href="mailto:hello@safelocation.in" target="_blank">Get in touch with us</a>
     </modal>
   </div>
 </template>
@@ -46,7 +46,7 @@
       margin-bottom: 1rem;
     }
 
-    button {
+    .get-in-touch {
       text-transform: uppercase;
       padding: 1em 1.6em;
       font-family: Muli;

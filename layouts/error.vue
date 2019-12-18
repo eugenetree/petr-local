@@ -17,7 +17,7 @@
             Check back in few days. We are pushing ahead and adding new cities, 
             regions and countries on daily basis. If you would like us to prioritize 
             the location you have been searching for, just send us an email to 
-            hello@staysafe.in.
+            <a href="mailto:hello@staysafe.in" target="_blank">hello@safelocation.in.</a>
           </li>
         </ol>
       </div>
@@ -56,6 +56,9 @@ export default {
     .desc, ol li {
       line-height: 1.75em;
       letter-spacing: .185px;
+      a {
+        color: $dark;
+      }
     }
     h1 {
       font-size: 2.6em;

@@ -94,6 +94,7 @@
     }
     .menu-list {
       height: auto;
+      z-index: 1001;
       .menu-item {
         color: $dark;
         margin-right: 1.8em;
@@ -153,7 +154,6 @@
         display: flex;
         flex-direction: column;
         position: fixed;
-        z-index: 1;
         top: $navbar-height;
         left: 0;
         width: 100%;

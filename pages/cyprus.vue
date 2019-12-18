@@ -2,10 +2,11 @@
   <div>
     <section class="slider-map-section">
       <div class="content">
-        <span style="font-size: 14px; color: #888888; margin-top: 25px; margin-bottom: 15px; display: block">Europe <img src="@/assets/img/arrow-right.png" style="height: 10px; width: 14px; display: inline-block;margin-right: 5px" alt=""><span class="green">Cyprus</span></span>
-        <!-- <svg height="65" width="65">
-	        <circle class="circle" cx="32.5" cy="32.5" r="30.5" stroke-linecap="round" stroke-mitterlimit="0" stroke="#231f20" stroke-dasharray="1000" stroke-dashoffset="925" stroke-width="4" fill-opacity="0" />
-        </svg> -->
+        <div class="route">
+          <span class="continent">Europe
+            <font-awesome-icon :icon="['fas', 'long-arrow-alt-right']"/>    
+          <span class="country green">Cyprus</span></span>
+        </div>
         <h1 class="title">How safe is Cyprus</h1>
         <div class="flex">
           <div class="slider">
@@ -180,6 +181,14 @@
       .title {
         font-size: 2.3em;
         margin-bottom: 2rem;
+      }
+
+      .route {
+        font-size: 14px; 
+        color: #888888; 
+        margin-top: 25px; 
+        margin-bottom: 15px; 
+        display: block;
       }
 
       .slider {
