@@ -221,6 +221,7 @@
       }
       .map {
         width: 40%;
+        height: 460px;
       }
     }
   }
