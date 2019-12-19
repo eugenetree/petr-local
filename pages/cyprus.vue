@@ -17,7 +17,7 @@
             <client-only>
               <slick-slide 
                 class="slider-main"
-                ref="slick"
+                ref="slider-main"
                 :options="sliderMainOpt">
                 <img src="@/assets/img/map/slide-1.png" alt="">
                 <img src="@/assets/img/map/slide-2.png" alt="">
@@ -27,7 +27,9 @@
               </slick-slide>
 
               <slick-slide 
+                v-if="sliderSubOpt.display"
                 class="slider-sub"
+                ref="slider-sub"
                 :options="sliderSubOpt">
                 <img src="@/assets/img/map/slide-1.png" alt="">
                 <img src="@/assets/img/map/slide-2.png" alt="">
@@ -117,8 +119,11 @@
       Map,
       SearchBox
     },
+
+
     data() {
       return {
+        sliderResizeTimeout: null,
         sliderMainOpt: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -130,7 +135,8 @@
           slidesToScroll: 1,
           asNavFor: '.slider-main',
           arrows: false,
-          focusOnSelect: true
+          focusOnSelect: true,
+          display: true
 			  },
         coords: [
           {latLng: [47, -1]},
@@ -140,11 +146,33 @@
         districts: ['Modica', 'Avellino', 'Teramo', 'Avellino', 'Teramo', 'Modica', 'Avellino', 'Teramo', 'Modica', 'Avellino', 'Teramo', 'Avellino', 'Teramo', 'Modica', 'Avellino', 'Teramo']
       }
     },
-    methods: {
-  },
-  mounted() {
-  },
 
+
+    methods: {
+      sliderReload() {
+        this.sliderSubOpt.display = false;
+        this.$nextTick(() => this.sliderSubOpt.display = true)
+      },
+
+      debounce(func, timeout) {
+        let timer;
+        return function debounced() {
+          clearTimeout(timer);
+          timer = setTimeout(func, timeout)
+        }
+      }
+    },
+   
+
+    mounted() {
+      this.sliderReload = this.debounce(this.sliderReload, 100);
+      window.addEventListener('resize', this.sliderReload)
+    },
+
+
+    beforeDestroy() {
+      window.removeEventListener('resize', this.sliderReload)
+    }
   }
 </script>
 
@@ -157,6 +185,9 @@
 <style lang="scss">
   .slider-map-section {
     margin-bottom: 3em;
+    * {
+      outline: none;
+    }
     .slider-sub {
       .slick-slide {
         height:100px;
