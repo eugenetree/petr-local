@@ -96,7 +96,7 @@
             z-index: 0;
             left: 0;
             top: 0;
-            width: 100%;
+            width: 101%;
             height: 100%;
           }
           &:hover {

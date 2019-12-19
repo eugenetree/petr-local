@@ -11,8 +11,8 @@
         <div class="flex">
           <div class="slider">
             <div class="slider-nav">
-              <div class="arrow left-arrow" @click="$refs.slick.next()"></div>
-              <div class="arrow right-arrow" @click="$refs.slick.prev()"></div>
+              <div class="arrow left-arrow" @click="$refs['slider-main'].next()"></div>
+              <div class="arrow right-arrow" @click="$refs['slider-main'].prev()"></div>
             </div>
             <client-only>
               <slick-slide 
