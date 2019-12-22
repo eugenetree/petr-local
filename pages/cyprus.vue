@@ -31,11 +31,11 @@
                 class="slider-sub"
                 ref="slider-sub"
                 :options="sliderSubOpt">
-                <img src="@/assets/img/map/slide-1.png" alt="">
-                <img src="@/assets/img/map/slide-2.png" alt="">
-                <img src="@/assets/img/map/slide-3.png" alt="">
-                <img src="@/assets/img/map/slide-4.png" alt="">
-                <img src="@/assets/img/map/slide-5.png" alt="">
+                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-1.png" alt="">
+                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-2.png" alt="">
+                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-3.png" alt="">
+                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-4.png" alt="">
+                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-5.png" alt="">
               </slick-slide>
             </client-only>
           </div>
@@ -136,7 +136,8 @@
           asNavFor: '.slider-main',
           arrows: false,
           focusOnSelect: true,
-          display: true
+          display: true,
+          isActive: false
 			  },
         coords: [
           {latLng: [47, -1]},
@@ -149,6 +150,9 @@
 
 
     methods: {
+      test(e) {
+        e.stopPropagation();
+      },
       sliderReload() {
         this.sliderSubOpt.display = false;
         this.$nextTick(() => this.sliderSubOpt.display = true)
@@ -165,6 +169,9 @@
    
 
     mounted() {
+      setInterval(() => {
+        console.log(document.querySelector('.slider-sub.slick-initialized'))
+      }, 100);
       this.sliderReload = this.debounce(this.sliderReload, 100);
       window.addEventListener('resize', this.sliderReload)
     },
