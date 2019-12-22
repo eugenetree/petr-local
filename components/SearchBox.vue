@@ -6,7 +6,7 @@
         <span v-html="highlight(item.suggestion)"></span> <span class="type">{{ ` (${item.resultType})` }}</span>
       </div>
     </div>
-    <button>Search</button>
+    <button @click="$router.push(searchSuggestList[0].url)">Search</button>
     <div class="search-icon">
       <img src="~assets/img/search.png" alt="">
     </div>
@@ -87,6 +87,7 @@
       padding: 5px 20px;
       .type {
         color: #999999;
+        font-weight: 300;
       }
       &:hover {
         background-color: #E4E4E4;
@@ -133,6 +134,9 @@
         img {
           object-fit: none;
         }
+      }
+      .search-suggest-list {
+        width: 100%;
       }
     }
   }
