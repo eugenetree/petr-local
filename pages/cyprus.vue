@@ -230,7 +230,11 @@
         position: relative;
         width: 60%;
         .slider-nav {
-          display: none;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: calc(100% - 100px);
           .left-arrow {
             left: 10px;
             transform: translateY(-50%);
@@ -358,7 +362,7 @@
         margin-left: -20px;
         width: calc(100% + 40px);
         .slider-nav {
-          display: block;
+          height: 100%;
         }
       }
       .map {
