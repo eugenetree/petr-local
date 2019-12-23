@@ -247,22 +247,25 @@
             position: absolute;
             top: 50%;
             z-index: 1;
-            width: 20px;
-            height: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.404);
+            border-radius: 50%;
+            cursor: pointer;
             &::after, &::before {
               content: '';
               position: absolute;
-              left: 0;
-              top: 0;
+              left: 50%;
+              top: 50%;
               width: 2px;
-              height: 20px;
+              height: 10px;
               background-color: rgb(255, 255, 255);
             }
             &::after {
-              transform: translate(10px, -6.4px) rotate(45deg);
+              transform: translate(-50%, calc(-50% + 3px)) rotate(-45deg);
             }
             &::before {
-              transform: translate(10px, 6.4px) rotate(-45deg);
+              transform: translate(-50%, calc(-50% - 3px)) rotate(45deg);
             }
           }
         }
