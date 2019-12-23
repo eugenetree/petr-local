@@ -31,11 +31,11 @@
                 class="slider-sub"
                 ref="slider-sub"
                 :options="sliderSubOpt">
-                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-1.png" alt="">
-                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-2.png" alt="">
-                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-3.png" alt="">
-                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-4.png" alt="">
-                <img @click="sliderSubOpt.isActive ? '' : test($event)" src="@/assets/img/map/slide-5.png" alt="">
+                <img src="@/assets/img/map/slide-1.png" alt="">
+                <img src="@/assets/img/map/slide-2.png" alt="">
+                <img src="@/assets/img/map/slide-3.png" alt="">
+                <img src="@/assets/img/map/slide-4.png" alt="">
+                <img src="@/assets/img/map/slide-5.png" alt="">
               </slick-slide>
             </client-only>
           </div>
@@ -169,9 +169,6 @@
    
 
     mounted() {
-      setInterval(() => {
-        console.log(document.querySelector('.slider-sub.slick-initialized'))
-      }, 100);
       this.sliderReload = this.debounce(this.sliderReload, 100);
       window.addEventListener('resize', this.sliderReload)
     },
