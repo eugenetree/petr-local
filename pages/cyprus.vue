@@ -19,7 +19,8 @@
                 class="slider-main"
                 ref="slider-main"
                 :options="sliderMainOpt">
-                <img v-for="(item, index) in images" :key="index" :src="item" alt="">
+                <img v-for="(item, index) in fetchData.images" :key="index" :src="item.link" alt="">
+                <!-- <img v-for="(item, index) in images" :key="index" :src="item" alt=""> -->
               </slick-slide>
 
               <slick-slide 
@@ -27,7 +28,8 @@
                 class="slider-sub"
                 ref="slider-sub"
                 :options="sliderSubOpt">
-                <img @click="imgClickHandler" v-for="(item, index) in images" :key="index" :src="item" alt="">
+                <img @click="imgClickHandler" v-for="(item, index) in fetchData.images" :key="index" :src="item.link" alt="">
+                <!-- <img @click="imgClickHandler" v-for="(item, index) in images" :key="index" :src="item" alt=""> -->
               </slick-slide>
             </client-only>
           </div>
@@ -41,8 +43,8 @@
     <section class="text-section">
       <div class="content">
         <h2 class="title">How safe is Cyprus</h2>
-        <p>
-          Street crime is low risk and incidents happen very rarely. But travellers should 
+        <div v-html="fetchData.pageText">
+          <!-- Street crime is low risk and incidents happen very rarely. But travellers should 
           take extra care when in unfamiliar neighbourhoods or venturing away from 
           main <a href="#">tourist tracks.</a> In the past, when muggings have occurred, the assailants 
           have been unarmed. Armed robberies are more common on the Turkish side in 
@@ -64,8 +66,8 @@
           quality cigarettes (often sold in genuine-looking multipacks) and nightclub and 
           cabaret scams that lure you into a venue with promises of entertainment and 
           great food, but the reality is quite the opposite. To avoid being tricked to part 
-          with your cash, do your research before you head out for the night.
-        </p>
+          with your cash, do your research before you head out for the night. -->
+        </div>
       </div>
     </section>
 
@@ -103,6 +105,8 @@
 
 <script>
   import gsap from 'gsap'
+  import axios from 'axios';
+
   import Map from '@/components/map/Map.vue'
   import SearchBox from '@/components/SearchBox.vue'
 
@@ -112,6 +116,11 @@
       SearchBox
     },
 
+    async asyncData () {
+      let { data } = await axios.get('https://safelocationapi.azurewebsites.net/api/PortalPage/1')
+      data.pageText = data.pageText.replace(/<img[^>]*>/g,"");
+      return { fetchData: data }
+    },
 
     data() {
       return {
@@ -152,8 +161,11 @@
 
     methods: {
       handleSetPosition(event, slick) {
+        if (this.fetchData.images.length > 5) return;
+
         // this method fix bug when you click on sub-slider after it have already loaded, but other elements
         // are still loading and after their load, sub-slier will bug-jump
+
         this.sliderSetPosCounter++;
         if (this.sliderSetPosCounter == 3) this.reInit()
       },
@@ -177,9 +189,14 @@
       },
 
       imagesLoad(array) {
-        array.forEach(src => {
+        if (array.length > 5) {
+          this.sliderSubOpt.loaded = true;
+          return;
+        }
+
+        array.forEach(item => {
           let img = new Image();
-          img.src = src;
+          img.src = item.link;
 
           img.onload = () => {
             this.sliderImagesLoad++;
@@ -195,15 +212,16 @@
 
     watch: {
       sliderImagesLoad(newVal) {
-        if (newVal == this.images.length) setTimeout(() => this.sliderSubOpt.loaded = true, 500);
+        console.log(newVal, this.images.length)
+        if (newVal == this.fetchData.images.length) setTimeout(() => this.sliderSubOpt.loaded = true, 500);
       }
     },
 
-    created() {
+    async created() {
     },
 
     mounted() {
-      this.imagesLoad(this.images);
+      this.imagesLoad(this.fetchData.images);
       this.sliderReload = this.debounce(this.sliderReload, 100);
       window.addEventListener('resize', this.sliderReload)
     },
