@@ -20,7 +20,6 @@
                 ref="slider-main"
                 :options="sliderMainOpt">
                 <img v-for="(item, index) in fetchData.images" :key="index" :src="item.link" alt="">
-                <!-- <img v-for="(item, index) in images" :key="index" :src="item" alt=""> -->
               </slick-slide>
 
               <slick-slide 
@@ -29,12 +28,11 @@
                 ref="slider-sub"
                 :options="sliderSubOpt">
                 <img @click="imgClickHandler" v-for="(item, index) in fetchData.images" :key="index" :src="item.link" alt="">
-                <!-- <img @click="imgClickHandler" v-for="(item, index) in images" :key="index" :src="item" alt=""> -->
               </slick-slide>
             </client-only>
           </div>
           <div class="map">
-            <Map :center="[35, 33]" :zoom="8"/>
+            <Map :center="fetchData.gps.split(',')" :zoom="8"/>
           </div>
         </div>
       </div>
