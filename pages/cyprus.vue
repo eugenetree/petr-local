@@ -23,7 +23,7 @@
               </slick-slide>
 
               <slick-slide 
-                v-if="sliderSubOpt.display"
+                @setPosition="handleSetPosition"
                 class="slider-sub"
                 ref="slider-sub"
                 :options="sliderSubOpt">
@@ -115,6 +115,7 @@
 
     data() {
       return {
+        sliderSetPosCounter: 0,
         sliderResizeTimeout: null,
         sliderImagesLoad: 0,
         sliderMainOpt: {
@@ -129,9 +130,8 @@
           asNavFor: '.slider-main',
           arrows: false,
           focusOnSelect: true,
-          display: true,
           loaded: false,
-          isActive: false
+          isActive: false,
         },
         images: [
           require('@/assets/img/map/slide-1.png'),
@@ -151,9 +151,21 @@
 
 
     methods: {
+      handleSetPosition(event, slick) {
+        // this method fix bug when you click on sub-slider after it have already loaded, but other elements
+        // are still loading and after their load, sub-slier will bug-jump
+        this.sliderSetPosCounter++;
+        if (this.sliderSetPosCounter == 3) this.reInit()
+      },
+
+      reInit() {
+        this.$nextTick(() => {
+          this.$refs['slider-sub'].reSlick();
+        });
+      },
+
       sliderReload() {
-        this.sliderSubOpt.display = false;
-        this.$nextTick(() => this.sliderSubOpt.display = true)
+        this.$refs['slider-sub'].reSlick();
       },
 
       debounce(func, timeout) {
@@ -187,6 +199,8 @@
       }
     },
 
+    created() {
+    },
 
     mounted() {
       this.imagesLoad(this.images);
