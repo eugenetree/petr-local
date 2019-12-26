@@ -19,11 +19,7 @@
                 class="slider-main"
                 ref="slider-main"
                 :options="sliderMainOpt">
-                <img src="@/assets/img/map/slide-1.png" alt="">
-                <img src="@/assets/img/map/slide-2.png" alt="">
-                <img src="@/assets/img/map/slide-3.png" alt="">
-                <img src="@/assets/img/map/slide-4.png" alt="">
-                <img src="@/assets/img/map/slide-5.png" alt="">
+                <img v-for="(item, index) in images" :key="index" :src="item" alt="">
               </slick-slide>
 
               <slick-slide 
@@ -124,6 +120,7 @@
     data() {
       return {
         sliderResizeTimeout: null,
+        sliderImagesLoad: 0,
         sliderMainOpt: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -136,9 +133,16 @@
           asNavFor: '.slider-main',
           arrows: false,
           focusOnSelect: true,
-          display: true,
+          display: false,
           isActive: false
-			  },
+        },
+        images: [
+          require('@/assets/img/map/slide-1.png'),
+          require('@/assets/img/map/slide-2.png'),
+          require('@/assets/img/map/slide-3.png'),
+          require('@/assets/img/map/slide-4.png'),
+          require('@/assets/img/map/slide-5.png'),
+        ],
         coords: [
           {latLng: [47, -1]},
           {latLng: [47.2, -1]}
@@ -150,9 +154,6 @@
 
 
     methods: {
-      test(e) {
-        e.stopPropagation();
-      },
       sliderReload() {
         this.sliderSubOpt.display = false;
         this.$nextTick(() => this.sliderSubOpt.display = true)
@@ -164,11 +165,30 @@
           clearTimeout(timer);
           timer = setTimeout(func, timeout)
         }
-      }
+      },
+
+      imagesLoad(array) {
+        array.forEach(src => {
+          let img = new Image();
+          img.src = src;
+
+          img.onload = () => {
+            this.sliderImagesLoad++;
+          }
+        })
+      },
     },
    
 
+    watch: {
+      sliderImagesLoad(newVal) {
+        if (newVal == this.images.length) this.sliderSubOpt.display = true;
+      }
+    },
+
+
     mounted() {
+      this.imagesLoad(this.images);
       this.sliderReload = this.debounce(this.sliderReload, 100);
       window.addEventListener('resize', this.sliderReload)
     },
