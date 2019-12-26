@@ -27,11 +27,7 @@
                 class="slider-sub"
                 ref="slider-sub"
                 :options="sliderSubOpt">
-                <img src="@/assets/img/map/slide-1.png" alt="">
-                <img src="@/assets/img/map/slide-2.png" alt="">
-                <img src="@/assets/img/map/slide-3.png" alt="">
-                <img src="@/assets/img/map/slide-4.png" alt="">
-                <img src="@/assets/img/map/slide-5.png" alt="">
+                <img @click="imgClickHandler" v-for="(item, index) in images" :key="index" :src="item" alt="">
               </slick-slide>
             </client-only>
           </div>
@@ -133,7 +129,8 @@
           asNavFor: '.slider-main',
           arrows: false,
           focusOnSelect: true,
-          display: false,
+          display: true,
+          loaded: false,
           isActive: false
         },
         images: [
@@ -177,12 +174,16 @@
           }
         })
       },
+
+      imgClickHandler(e) {
+        if (!this.sliderSubOpt.loaded) e.stopPropagation();
+      }
     },
    
 
     watch: {
       sliderImagesLoad(newVal) {
-        if (newVal == this.images.length) this.sliderSubOpt.display = true;
+        if (newVal == this.images.length) this.sliderSubOpt.loaded = true;
       }
     },
 
