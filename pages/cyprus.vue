@@ -183,7 +183,7 @@
 
     watch: {
       sliderImagesLoad(newVal) {
-        if (newVal == this.images.length) this.sliderSubOpt.loaded = true;
+        if (newVal == this.images.length) setTimeout(() => this.sliderSubOpt.loaded = true, 500);
       }
     },
 
