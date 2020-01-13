@@ -1,67 +1,25 @@
 <template>
         <div class="grid">
-          <div class="grid-item overlay">
+          <div v-for="(item, index) in gridList" :key="index" class="grid-item overlay">
             <div class="bg-img">
-              <img src="~assets/img/home/popular-1.png" alt="">
+              <img :src="item.url ? item.url : require(`assets/img/home/popular-1.png`)" alt="">
             </div>
             <span class="top">Safety in</span>
-            <span class="bottom">Costa Rica</span>
-          </div>
-         <div class="grid-item overlay">
-            <div class="bg-img">
-              <img src="~assets/img/home/popular-1.png" alt="">
-            </div>
-            <span class="top">Safety in</span>
-            <span class="bottom">Costa Rica</span>
-          </div>
-           <div class="grid-item overlay">
-            <div class="bg-img">
-              <img src="~assets/img/home/popular-1.png" alt="">
-            </div>
-            <span class="top">Safety in</span>
-            <span class="bottom">Costa Rica</span>
-          </div>
-           <div class="grid-item overlay">
-            <div class="bg-img">
-              <img src="~assets/img/home/popular-1.png" alt="">
-            </div>
-            <span class="top">Safety in</span>
-            <span class="bottom">Costa Rica</span>
-          </div>
-           <div class="grid-item overlay">
-            <div class="bg-img">
-              <img src="~assets/img/home/popular-1.png" alt="">
-            </div>
-            <span class="top">Safety in</span>
-            <span class="bottom">Costa Rica</span>
-          </div>
-           <div class="grid-item overlay">
-            <div class="bg-img">
-              <img src="~assets/img/home/popular-1.png" alt="">
-            </div>
-            <span class="top">Safety in</span>
-            <span class="bottom">Costa Rica</span>
-          </div>
-           <div class="grid-item overlay">
-            <div class="bg-img">
-              <img src="~assets/img/home/popular-1.png" alt="">
-            </div>
-            <span class="top">Safety in</span>
-            <span class="bottom">Costa Rica</span>
-          </div>
-           <div class="grid-item overlay">
-            <div class="bg-img">
-              <img src="~assets/img/home/popular-1.png" alt="">
-            </div>
-            <span class="top">Safety in</span>
-            <span class="bottom">Costa Rica</span>
+            <span class="bottom">{{ item.name }}</span>
           </div>
         </div>
 </template>
 
 <script>
   export default {
-    
+    props: {
+      gridList: {
+        type: Array,
+        default() {
+          return []
+        }
+      }
+    },
   }
 </script>
 
@@ -125,21 +83,7 @@
         }
       }
 
-  @media (max-width: 1150px) {
-    .grid {
-      .grid-item {
-        width: calc((100% - 50px) / 3);
-        &:nth-child(4n) {
-          margin-right: 25px;
-        }
-        &:nth-child(3n) {
-          margin-right: 0;
-        }
-      }
-    }
-  }
-
-    @media (max-width: 800px) {
+  @media (max-width: 1000px) {
     .grid {
       .grid-item {
         width: calc((100% - 25px) / 2);
@@ -153,7 +97,7 @@
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     .grid {
       .grid-item {
         margin-right: 0;

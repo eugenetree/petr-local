@@ -5,7 +5,7 @@
         <h1 class="title">Safety by continents</h1>
         <span class="hint">Pick a location to search for (un)safe hotspots</span>
         <div class="grid-wrapper">
-          <Grid/>
+          <Grid :gridList="popular" />
         </div>
         <h2 class="info-title">Odstavec textu</h2>
         <p class="info-desc">
@@ -33,44 +33,24 @@
   import Grid from '@/components/Grid.vue'
   import SearchBox from '@/components/SearchBox.vue'
 
+  import axios from 'axios'
+
   export default {
     components: {
       Grid,
       SearchBox
     },
+
+
+    async asyncData({ x, y, store }) {
+      let popular;
+      await axios.get(`${store.state.apiDomain}/api/autocomplete/popular`).then(response => popular = response.data.data);
+      return { popular }
+    },
+
+
     data() {
-      return {
-        safetyList: [
-          {
-            name: 'Africa',
-            img: require('@/assets/img/safety/1.png')
-          },
-          {
-            name: 'Antarctica',
-            img: require('@/assets/img/safety/2.png')
-          },
-          {
-            name: 'Asia',
-            img: require('@/assets/img/safety/3.png')
-          },
-          {
-            name: 'Australia',
-            img: require('@/assets/img/safety/4.png')
-          },
-          {
-            name: 'Europe',
-            img: require('@/assets/img/safety/5.png')
-          },
-          {
-            name: 'North America',
-            img: require('@/assets/img/safety/6.png')
-          },
-          {
-            name: 'South America',
-            img: require('@/assets/img/safety/7.png')
-          },
-        ] 
-      }
+      return {}
     },
   }
 </script>

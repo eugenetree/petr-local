@@ -26,7 +26,8 @@
     <section class="popular-section">
       <div class="content">
         <h3>Popular searches</h3>
-        <Grid/>
+        <Preloader v-if="popularLoading" />
+        <Grid :gridList="popular" />
       </div>
     </section>
   </section>
@@ -34,10 +35,36 @@
 
 <script>
 import Grid from '@/components/Grid.vue'
+import Preloader from '@/components/Preloader.vue'
+import axios from 'axios'
 
 export default {
   components: {
-    Grid
+    Grid,
+    Preloader
+  },
+
+
+  data() {
+    return {
+      popular: [],
+      popularLoading: true,
+    }
+  },
+
+
+  methods: {
+    async getPopular() {
+      await axios.get(`${this.$store.state.apiDomain}/api/autocomplete/popular`).then(response => {
+        this.popular = response.data.data;
+        this.popularLoading = false;
+      });
+    }
+  },
+
+  
+  created() {
+    setTimeout(this.getPopular, 1000);
   }
 }
 </script>

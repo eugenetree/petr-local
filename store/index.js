@@ -1,9 +1,6 @@
 export const state = () => ({
-  counter: 0
+  apiDomain: 'https://safelocationapi.azurewebsites.net'
 })
 
 export const mutations = {
-  increment (state) {
-    state.counter++
-  }
 }

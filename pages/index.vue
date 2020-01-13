@@ -17,14 +17,13 @@
             <span class="green"> cities.</span>
           </div>
         </div>
-        
       </div>
     </section>
 
     <section class="popular-section">
       <div class="content">
         <h3>Popular searches</h3>
-        <Grid/>
+        <Grid :gridList="popular" />
       </div>
     </section>
   </div>
@@ -33,10 +32,24 @@
 <script>
 import SearchBox from '@/components/SearchBox.vue'
 import Grid from '@/components/Grid.vue'
+import axios from 'axios'
+
 export default {
   components: {
     SearchBox,
     Grid
+  },
+
+
+  async asyncData ({ x, y, store }) {
+    let popular;
+    await axios.get(`${store.state.apiDomain}/api/autocomplete/popular`).then(response => popular = response.data.data);
+    return { popular }
+  },
+
+
+  mounted() {
+    console.log(this.popular);
   }
 }
 </script>
