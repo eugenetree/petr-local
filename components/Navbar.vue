@@ -7,8 +7,6 @@
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">About Us</nuxt-link>
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Contact Us</nuxt-link>
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Blog</nuxt-link>
-        <nuxt-link class="menu-item" to="/cyprus" @click.native="closeMenu">How Safe Page</nuxt-link>
-        <nuxt-link class="menu-item" to="/safety" @click.native="closeMenu">Safety Page</nuxt-link>
         <nuxt-link class="menu-item" to="" @click.native="$modal.show('missing')">Modal</nuxt-link>
       </div>
       <div class="burger" :class="{'burger-is-opened': burgerIsOpened}" @click="toggleMenu">
