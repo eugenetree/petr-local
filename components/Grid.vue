@@ -2,7 +2,7 @@
         <div class="grid">
             
           <div v-for="(item, index) in gridList" :key="index" class="grid-item overlay">
-            <nuxt-link :to="handleLink(item)">
+            <nuxt-link class="link" :to="handleLink(item)">
               <div class="bg-img">
                 <img :src="item.url ? item.url : require(`assets/img/home/popular-1.png`)" alt="">
               </div>
@@ -85,15 +85,16 @@
             position: relative;
             z-index: 1;
           }
+          .link {
+            text-align: center;
+          }
           .top {
             display: block;
             font-size: 1.25em;
-            text-align: center;
           }
           .bottom {
             font-size: 1.5em;
             font-weight: bold;
-            text-align: center;
             letter-spacing: .9px;
             border-bottom: 1px solid transparent;
             transition: .3s;
