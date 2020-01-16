@@ -5,16 +5,10 @@
         <h1 class="title">Safety by continents</h1>
         <span class="hint">Pick a location to search for (un)safe hotspots</span>
         <div class="grid-wrapper">
-          <Grid :gridList="popular" />
+          <Grid :gridList="fetchData.relatedAresas" />
         </div>
         <h2 class="info-title">Odstavec textu</h2>
-        <p class="info-desc">
-          Street crime is low risk and incidents happen very rarely. But travellers should 
-          take extra care when in unfamiliar neighbourhoods or venturing away from 
-          main tourist tracks. In the past, when muggings have occurred, the assailants 
-          have been unarmed. Armed robberies are more common on the Turkish side in 
-          the North, whilst being very rare in the South.
-        </p>
+        <div class="info-desc" v-html="fetchData.areaText" />
       </div>
       <div class="exact-location">
         <div class="bg-img overlay">
@@ -42,15 +36,25 @@
     },
 
 
-    async asyncData({ x, y, store }) {
-      let popular;
-      await axios.get(`${store.state.apiDomain}/api/autocomplete/popular`).then(response => popular = response.data.data);
-      return { popular }
+    validate ({ params }) {
+      return params.ppFalse.slice(0,5) == 'area-';
+    },
+
+
+    async asyncData({ params, store }) {
+      let fetchData;
+      await axios.get(`${store.state.apiDomain}/api/areas/t-${params.ppFalse.slice(5)}`).then(response => fetchData = response.data.data[0]);
+      return { fetchData }
     },
 
 
     data() {
       return {}
+    },
+
+
+    mounted() {
+      console.log(this.fetchData)
     },
   }
 </script>
@@ -86,6 +90,10 @@
     .info-desc {
       line-height: 1.75em;
       padding-bottom: 175px;
+      &::v-deep a {
+        color: $green;
+        text-decoration: underline;
+      }
     }
     .exact-location {
       position: relative;

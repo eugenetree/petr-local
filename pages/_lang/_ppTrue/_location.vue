@@ -2,11 +2,7 @@
   <div>
     <section class="slider-map-section">
       <div class="content">
-        <div class="route">
-          <span class="continent">Europe
-            <font-awesome-icon :icon="['fas', 'long-arrow-alt-right']"/>    
-          <span class="country green">Cyprus</span></span>
-        </div>
+        <div class="route" v-html="fetchData.breadcrumb" />
         <h1 class="title">How safe is Cyprus</h1>
         <div class="flex">
           <div class="slider">
@@ -41,31 +37,7 @@
     <section class="text-section">
       <div class="content">
         <h2 class="title">How safe is Cyprus</h2>
-        <div v-html="fetchData.pageText">
-          <!-- Street crime is low risk and incidents happen very rarely. But travellers should 
-          take extra care when in unfamiliar neighbourhoods or venturing away from 
-          main <a href="#">tourist tracks.</a> In the past, when muggings have occurred, the assailants 
-          have been unarmed. Armed robberies are more common on the Turkish side in 
-          the North, whilst being very rare in the South.<br><br>
-
-          Pickpocketing however, can be a problem in many of the busy tourist areas. 
-          Whilst it’s not an overly common occurrence, it does happen, as with any 
-          holiday destination in the world. So it is advised that money and valuables are 
-          kept out of view, and expensive jewellery and watches are left at home.<br><br>
-
-          Scams can also be an issue if you’re not careful. The risk of this increases 
-          during peak tourist periods, such as the busy summer season. Try to negotiate 
-          trips, excursions and travel in advance if possible, or book activities and taxis 
-          with your hotel. It can be tempting to go for the cheapest prices on the street, 
-          but organising everything through your hotel ensures that you are dealing with 
-          official companies.<br><br>
-
-          Other common scams that you may come across on the street include inferior 
-          quality cigarettes (often sold in genuine-looking multipacks) and nightclub and 
-          cabaret scams that lure you into a venue with promises of entertainment and 
-          great food, but the reality is quite the opposite. To avoid being tricked to part 
-          with your cash, do your research before you head out for the night. -->
-        </div>
+        <div v-html="fetchData.pageText"></div>
       </div>
     </section>
 
@@ -76,18 +48,17 @@
         </div>
 
         <div class="refine-search">
-          <h3>Refine search by <span class="green">district</span> or <span class="green">major towns</span> and <span class="green">cities</span> in Cyprus</h3>
-          <div class="cities">
-            <h5>Cities</h5>
-            <a class="city" href="#" v-for="(item, index) in cities" :key="index">{{ item }}</a>
-          </div>
+          <h3>Refine search by 
+            <span class="green" v-for="(value, name, index) in subAreas" :key="index">{{ name }} <span v-if="Object.keys(subAreas).length != index + 1">and </span> </span>  
+          in Cyprus</h3>
 
-          <div class="districts">
-            <h5>Districts</h5>
-            <a class="district" href="#" v-for="(item, index) in districts" :key="index">{{ item }}</a>
+          <div class="sub-areas" v-for="(value, name, index) in subAreas" :key="index">
+            <h5>{{ name }}</h5>
+            <nuxt-link class="sub-area-item" v-for="(item, index) in value" :key="index" :to="`/en/${item.areaType}/${item.name}`">{{ item.name }}</nuxt-link>
           </div>
         </div>
       </div>
+
       <div class="exact-location">
         <div class="bg-img overlay">
           <img src="~assets/img/home/bg-main.png" alt="">
@@ -114,8 +85,8 @@
       SearchBox
     },
 
-    async asyncData () {
-      let { data } = await axios.get('https://safelocationapi.azurewebsites.net/api/PortalPage/1')
+    async asyncData ({ params }) {
+      let { data } = await axios.get(`https://safelocationapi.azurewebsites.net/api/PortalPage/t-${params.location}`)
       data.pageText = data.pageText.replace(/<img[^>]*>/g,"");
       return { fetchData: data }
     },
@@ -151,8 +122,7 @@
           {latLng: [47, -1]},
           {latLng: [47.2, -1]}
         ],
-        cities: ['Modica', 'Avellino', 'Teramo', 'Avellino', 'Teramo', 'Modica', 'Avellino', 'Teramo'],
-        districts: ['Modica', 'Avellino', 'Teramo', 'Avellino', 'Teramo', 'Modica', 'Avellino', 'Teramo', 'Modica', 'Avellino', 'Teramo', 'Avellino', 'Teramo', 'Modica', 'Avellino', 'Teramo']
+        subAreas: {},
       }
     },
 
@@ -216,12 +186,20 @@
     },
 
     async created() {
+      this.fetchData.areas.forEach(item => {
+        if (!this.subAreas[item.areaType]) this.subAreas[item.areaType] = []
+
+        this.subAreas[item.areaType].push({
+          name: item.name,
+          areaType: item.areaType
+        })
+      })
     },
 
     mounted() {
       this.imagesLoad(this.fetchData.images);
       this.sliderReload = this.debounce(this.sliderReload, 100);
-      window.addEventListener('resize', this.sliderReload)
+      window.addEventListener('resize', this.sliderReload);
     },
 
 
@@ -275,6 +253,9 @@
         margin-top: 25px; 
         margin-bottom: 15px; 
         display: block;
+        .current {
+          color: $green;
+        }
       }
 
       .slider {
@@ -367,12 +348,13 @@
         font-size: 1.3em;
         margin-bottom: .6rem;
       }
-      .cities, .districts {
+      .sub-areas {
         padding-bottom: 2.3rem;
         max-width: 940px;
         text-align: center;
       }
-      .city, .district {
+
+      .sub-area-item {
         display: inline-block;
         font-size: .9em;
         font-weight: 700;
@@ -382,6 +364,9 @@
         transition: .2s;
         margin-bottom: 10px;
         margin-right: 10px;
+        &:last-child {
+          margin-right: 0;
+        }
         &:hover {
           color: $white;
           background-color: $green;

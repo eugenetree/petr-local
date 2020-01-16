@@ -4,11 +4,9 @@
       <nuxt-link to="/"><Logo fontSize='1.5em'/></nuxt-link>
       <div class="menu-list" ref="menuList" v-click-outside="closeMenu">
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Home</nuxt-link>
-        <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Travel Insurance</nuxt-link>
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">About Us</nuxt-link>
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Contact Us</nuxt-link>
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Blog</nuxt-link>
-        <nuxt-link class="menu-item" to="/1" @click.native="closeMenu">Error</nuxt-link>
         <nuxt-link class="menu-item" to="/cyprus" @click.native="closeMenu">How Safe Page</nuxt-link>
         <nuxt-link class="menu-item" to="/safety" @click.native="closeMenu">Safety Page</nuxt-link>
         <nuxt-link class="menu-item" to="" @click.native="$modal.show('missing')">Modal</nuxt-link>

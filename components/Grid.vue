@@ -1,11 +1,14 @@
 <template>
         <div class="grid">
+            
           <div v-for="(item, index) in gridList" :key="index" class="grid-item overlay">
-            <div class="bg-img">
-              <img :src="item.url ? item.url : require(`assets/img/home/popular-1.png`)" alt="">
-            </div>
-            <span class="top">Safety in</span>
-            <span class="bottom">{{ item.name }}</span>
+            <nuxt-link :to="handleLink(item)">
+              <div class="bg-img">
+                <img :src="item.url ? item.url : require(`assets/img/home/popular-1.png`)" alt="">
+              </div>
+              <span class="top">Safety in</span>
+              <span class="bottom">{{ item.name }}</span>
+            </nuxt-link>
           </div>
         </div>
 </template>
@@ -20,6 +23,18 @@
         }
       }
     },
+
+
+    methods: {
+      handleLink(item) {
+        if (item.portalPage == null) return `/en/${item.areaType}/${item.name}`
+        return item.portalPage ? `/en/${item.area}/${item.nameToken}` : `/en/area-${item.nameToken}`
+      }
+    },
+
+
+    mounted() {
+    }
   }
 </script>
 
@@ -43,7 +58,7 @@
           margin-bottom: 25px;
           background-color: black;
           transition: .3s;
-          &:nth-child(4n) {
+          &:nth-child(4n), &:last-child {
             margin-right: 0;
           }
           &::after {
@@ -71,11 +86,14 @@
             z-index: 1;
           }
           .top {
+            display: block;
             font-size: 1.25em;
+            text-align: center;
           }
           .bottom {
             font-size: 1.5em;
             font-weight: bold;
+            text-align: center;
             letter-spacing: .9px;
             border-bottom: 1px solid transparent;
             transition: .3s;
