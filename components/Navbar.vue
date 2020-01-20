@@ -149,7 +149,7 @@
         visibility: hidden;
         display: flex;
         flex-direction: column;
-        position: fixed;
+        position: absolute;
         top: $navbar-height;
         left: 0;
         width: 100%;
