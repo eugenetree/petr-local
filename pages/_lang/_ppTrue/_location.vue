@@ -85,7 +85,11 @@
       SearchBox
     },
 
-    async asyncData ({ params }) {
+    async asyncData ({ params, redirect }) {
+      setTimeout(() => {
+        if (!data) redirect('/404')
+      }, 5000);
+      
       let { data } = await axios.get(`https://safelocationapi.azurewebsites.net/api/PortalPage/t-${params.location}`)
       data.pageText = data.pageText.replace(/<img[^>]*>/g,"");
       return { fetchData: data }

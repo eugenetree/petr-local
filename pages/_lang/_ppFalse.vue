@@ -41,7 +41,11 @@
     },
 
 
-    async asyncData({ params, store }) {
+    async asyncData({ params, store, redirect }) {
+      setTimeout(() => {
+        if (!fetchData) redirect('/404');
+      }, 5000);
+
       let fetchData;
       await axios.get(`${store.state.apiDomain}/api/areas/t-${params.ppFalse.slice(5)}`).then(response => fetchData = response.data.data[0]);
       return { fetchData }
