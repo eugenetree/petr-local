@@ -1,6 +1,6 @@
 <template>
   <div class="search-box" v-click-outside="() => searchSuggestList = []">
-    <input @focus="getSuggestList" @input="getSuggestList" v-model="searchPhrase" type="text" placeholder="Type in and select your destination from the list ">
+    <input @focus="getSuggestList" @input="getSuggestList" :value="searchPhrase" type="text" placeholder="Type in and select your destination from the list ">
     <div class="search-suggest-list" v-if="searchSuggestList.length">
       <div class="search-suggest-item" v-for="item in searchSuggestList" :key="item.resultType" @click="$router.push(item.url)">
         <span v-html="highlight(item.suggestion)"></span> <span class="type">{{ ` (${item.resultType})` }}</span>
@@ -33,7 +33,8 @@
 
 
     methods: {
-      getSuggestList() {
+      getSuggestList(e) {
+        this.searchPhrase = e.target.value;
         clearTimeout(this.debouncedTimeout);
         if (this.searchPhrase.length < 3 || this.throttled) {this.searchSuggestList = []; return};
         this.debouncedTimeout = setTimeout(async () => {
