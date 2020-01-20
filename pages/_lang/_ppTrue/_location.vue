@@ -86,13 +86,28 @@
     },
 
     async asyncData ({ params, redirect }) {
-      setTimeout(() => {
-        if (!data) redirect('/404')
-      }, 5000);
-      
-      let { data } = await axios.get(`https://safelocationapi.azurewebsites.net/api/PortalPage/t-${params.location}`)
-      data.pageText = data.pageText.replace(/<img[^>]*>/g,"");
-      return { fetchData: data }
+      let timeout = setTimeout(() => {
+        redirect('/404');
+        source.cancel();
+      }, 8000);
+
+      const CancelToken = axios.CancelToken;
+      const source = CancelToken.source();
+
+      let fetchData = {};
+
+      await axios.get(`https://safelocationapi.azurewebsites.net/api/PortalPage/t-${params.location}`, {cancelToken: source.token})
+        .then(response => {
+          fetchData = response.data
+          fetchData.pageText = fetchData.pageText.replace(/<img[^>]*>/g,"");
+          clearTimeout(timeout)
+        })
+        .catch(error => {
+          redirect('/404');
+          clearTimeout(timeout)
+        })
+
+      return { fetchData }
     },
 
     data() {
@@ -184,7 +199,6 @@
 
     watch: {
       sliderImagesLoad(newVal) {
-        console.log(newVal, this.images.length)
         if (newVal == this.fetchData.images.length) setTimeout(() => this.sliderSubOpt.loaded = true, 500);
       }
     },

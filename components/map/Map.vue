@@ -38,19 +38,11 @@
     props: ['coords', 'center', 'zoom'],
     methods: {
       circleHandler(e, payload) {
-        // console.log(e.popup._source.getElement());
-        // let marker = e.popup._source.getElement()
-        // let circle = marker.parentNode.querySelector(`.bg-icon[data-id='${payload.id}']`);
-
-        // if (payload.display) gsap.fromTo(circle, {autoAlpha: 0}, {autoAlpha: 1, duration: .5})
-        // else gsap.fromTo(circle, {autoAlpha: 1}, {autoAlpha: 0, duration: .5})
       },
           close(e) {
-      console.log(e.popup._source.getElement())
     }
     },
     mounted() {
-      console.log('moundet');
     }
   }
 </script>

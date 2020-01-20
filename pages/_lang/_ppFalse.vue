@@ -42,23 +42,27 @@
 
 
     async asyncData({ params, store, redirect }) {
-      setTimeout(() => {
-        if (!fetchData) redirect('/404');
-      }, 5000);
+      let timeout = setTimeout(() => {
+        redirect('/404');
+        source.cancel();
+      }, 8000);
 
-      let fetchData;
-      await axios.get(`${store.state.apiDomain}/api/areas/t-${params.ppFalse.slice(5)}`).then(response => fetchData = response.data.data[0]);
+      const CancelToken = axios.CancelToken;
+      const source = CancelToken.source();
+
+      let fetchData = {};
+
+      await axios.get(`${store.state.apiDomain}/api/areas/t-${params.ppFalse.slice(5)}`, {cancelToken: source.token})
+        .then(response => {
+          fetchData = response.data.data[0]
+          clearTimeout(timeout);
+        })
+        .catch(error => {
+          redirect('/404'); 
+          clearTimeout(timeout)
+        })
+
       return { fetchData }
-    },
-
-
-    data() {
-      return {}
-    },
-
-
-    mounted() {
-      console.log(this.fetchData)
     },
   }
 </script>

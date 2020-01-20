@@ -46,11 +46,6 @@ export default {
     await axios.get(`${store.state.apiDomain}/api/autocomplete/popular`).then(response => popular = response.data.data);
     return { popular }
   },
-
-
-  mounted() {
-    console.log(this.popular);
-  }
 }
 </script>
 

@@ -46,11 +46,6 @@
         return `<span class="highlighted">${word.slice(0, this.searchPhrase.length)}</span>${word.slice(this.searchPhrase.length)}`
       }
     },
-
-
-    mounted() {
-      console.log(axios)
-    },
   }
 </script>
 

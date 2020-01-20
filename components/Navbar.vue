@@ -90,7 +90,7 @@
     }
     .menu-list {
       height: auto;
-      z-index: 1001;
+      z-index: 999;
       .menu-item {
         color: $dark;
         margin-right: 1.8em;
