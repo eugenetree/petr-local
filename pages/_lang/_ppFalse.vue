@@ -12,7 +12,7 @@
       </div>
       <div class="exact-location">
         <div class="bg-img overlay">
-          <img src="~assets/img/home/bg-main.png" alt="">
+          <img src="~assets/img/home/bg-main.jpg" alt="">
         </div>
         <div class="content">
           <h3>Or search for exact location</h3>

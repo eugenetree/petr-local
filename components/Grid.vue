@@ -4,7 +4,7 @@
           <div v-for="(item, index) in gridList" :key="index" class="grid-item overlay">
             <nuxt-link class="link" :to="handleLink(item)">
               <div class="bg-img">
-                <img :src="item.url ? item.url : require(`assets/img/home/popular-1.png`)" alt="">
+                <img :src="item.url ? item.url : require(`assets/img/home/popular-1.jpg`)" alt="">
               </div>
               <span class="top">Safety in</span>
               <span class="bottom">{{ item.name }}</span>
