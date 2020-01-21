@@ -1,22 +1,24 @@
 <template>
   <div>
-    <span class="popup-title">Hotel Ebersbach</span>
+    <span class="popup-title">{{ value.name }}</span>
     <div>
-      <Rating class="rating" :value="88"/>
+      <Rating class="rating" :value="value.area * 10"/>
       <span class="rating-title">(Hotel rating)</span>
     </div>
     <div>
-      <Rating class="rating" :value="66"/>
+      <Rating class="rating" :value="value.location * 10"/>
       <span class="rating-title">(Location rating)</span>
     </div>
     <span class="rating-money">$$$</span>
-    <button class="show-info">Show information and prices</button>
+    <a class="show-info" :href="value.url">Show information and prices</a>
   </div>
 </template>
 
 <script>
   import Rating from "@/components/map/Rating.vue"
   export default {
+    props: ['value'],
+
     components: {
       Rating
     }
@@ -50,6 +52,8 @@
     margin-bottom: 10px;
   }
   .show-info {
+    display: block;
+    text-align: center;
     background-color: $green;
     font-size: 12px;
     font-weight: 600;

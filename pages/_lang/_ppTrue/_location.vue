@@ -44,7 +44,7 @@
     <section class="search-section">
       <div class="content">
         <div class="map">
-          <Map :coords="coords" :center="coords[0].latLng" :zoom="10"/>
+          <Map :hotels="fetchData.hotels" :center="fetchData.gps.split(',')" :zoom="12"/>
         </div>
 
         <div class="refine-search">

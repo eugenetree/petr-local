@@ -2,19 +2,19 @@
     <client-only>
         <l-map :zoom="zoom" :center="center">
           <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-          <div class="markers-wrap" v-for="(item, index) in coords" :key="index">
-            <l-marker :key="index" @popupopen="circleHandler($event, {id: index, display: true})" @popupclose="circleHandler($event, {id: index, display: false})" :zIndexOffset="1" :lat-lng="item.latLng">
+          <div class="markers-wrap" v-for="(item, index) in hotels" :key="index">
+            <l-marker :key="index" @popupopen="circleHandler($event, {id: index, display: true})" @popupclose="circleHandler($event, {id: index, display: false})" :zIndexOffset="1" :lat-lng="[item.lat, item.lng]">
             <l-icon
                 :icon-size="[30,37]"
                 :icon-anchor="[14,0]"
                 :icon-url="require('assets/img/map/icon.png')"
               />
-            <l-popup>
-              <MapPopup/>
+            <l-popup style="max-width: 200px">
+              <MapPopup :value="item" />
             </l-popup>
           </l-marker>
 
-            <l-marker :key="index + 'circle'" :lat-lng="item.latLng">
+            <l-marker :key="index + 'circle'" :lat-lng="[item.lat, item.lng]">
                 <l-icon
                   :icon-size="[50,50]"
                   :icon-anchor="[24,0]"
@@ -35,7 +35,7 @@
     components: {
       MapPopup
     },
-    props: ['coords', 'center', 'zoom'],
+    props: ['hotels', 'center', 'zoom'],
     methods: {
       circleHandler(e, payload) {
       },
