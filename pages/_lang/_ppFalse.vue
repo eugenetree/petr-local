@@ -2,12 +2,12 @@
   <div>
     <section class="safety-section">
       <div class="content">
-        <h1 class="title">Safety by continents</h1>
+        <h1 class="title">Safety by {{ fetchData.name }}</h1>
         <span class="hint">Pick a location to search for (un)safe hotspots</span>
         <div class="grid-wrapper">
           <Grid :gridList="fetchData.relatedAresas" />
         </div>
-        <h2 class="info-title">Odstavec textu</h2>
+        <!-- <h2 class="info-title">Odstavec textu</h2> -->
         <div class="info-desc" v-html="fetchData.areaText" />
       </div>
       <div class="exact-location">

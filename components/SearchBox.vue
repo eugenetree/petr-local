@@ -1,12 +1,12 @@
 <template>
-  <div class="search-box" v-click-outside="() => searchSuggestList = []">
+  <div class="search-box" v-click-outside="searchBoxClickOutside">
     <input @focus="getSuggestList" @input="getSuggestList" :value="searchPhrase" type="text" placeholder="Type in and select your destination from the list ">
     <div class="search-suggest-list" v-if="searchSuggestList.length">
-      <div class="search-suggest-item" v-for="item in searchSuggestList" :key="item.resultType" @click="$router.push(item.url)">
-        <span v-html="highlight(item.suggestion)"></span> <span class="type">{{ ` (${item.resultType})` }}</span>
+      <div class="search-suggest-item" v-for="item in searchSuggestList" :key="item.resultType" @click="$router.push(item.url); searchSuggestList=[]">
+        <span v-html="highlight(item.suggestion)"></span> <span class="type">{{ `(${item.resultType})` }}</span>
       </div>
     </div>
-    <button @click="$router.push(searchSuggestList[0].url)">Search</button>
+    <button @click="this.getSuggestList">Search</button>
     <div class="search-icon">
       <img src="~assets/img/search.png" alt="">
     </div>
@@ -34,9 +34,10 @@
 
     methods: {
       getSuggestList(e) {
-        this.searchPhrase = e.target.value;
+        if (e.type == 'input') this.searchPhrase = e.target.value;
+
         clearTimeout(this.debouncedTimeout);
-        if (this.searchPhrase.length < 3 || this.throttled) {this.searchSuggestList = []; return};
+        if ((this.searchPhrase.length < 3 || this.throttled) && e.type != 'click') return;
         this.debouncedTimeout = setTimeout(async () => {
           let response = await axios.get('https://safelocationapi.azurewebsites.net/api/AutoComplete/' + this.searchPhrase)
           this.searchSuggestList = response.data.data;
@@ -45,6 +46,11 @@
 
       highlight(word) {
         return `<span class="highlighted">${word.slice(0, this.searchPhrase.length)}</span>${word.slice(this.searchPhrase.length)}`
+      },
+
+      searchBoxClickOutside(e) {
+        if (e.target.closest('.search-box')) return;
+        this.searchSuggestList = []
       }
     },
   }

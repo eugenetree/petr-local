@@ -1,10 +1,9 @@
 <template>
         <div class="grid">
-            
           <div v-for="(item, index) in gridList" :key="index" class="grid-item overlay">
             <nuxt-link class="link" :to="handleLink(item)">
               <div class="bg-img">
-                <img :src="item.url ? item.url : require(`assets/img/home/popular-1.jpg`)" alt="">
+                <img :src="item.image.includes('dummy') ? require(`assets/img/home/popular-1.jpg`) : item.image " alt="">
               </div>
               <span class="top">Safety in</span>
               <span class="bottom">{{ item.name }}</span>
