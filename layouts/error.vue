@@ -45,6 +45,13 @@ export default {
   },
 
 
+  head() {
+    return {
+      title: "SafeLocation - Error"
+    }
+  },
+
+
   data() {
     return {
       popular: [],

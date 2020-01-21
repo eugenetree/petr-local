@@ -36,6 +36,14 @@
     },
 
 
+    head() {
+      let title = this.$route.params.ppFalse.slice(5)
+      return {
+        title: title[0].toUpperCase() + title.slice(1)
+      }
+    },
+
+
     validate ({ params }) {
       return params.ppFalse.slice(0,5) == 'area-';
     },

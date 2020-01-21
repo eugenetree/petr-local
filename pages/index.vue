@@ -40,6 +40,11 @@ export default {
     Grid
   },
 
+  head() {
+    return {
+      title: 'SafeLocation'
+    }
+  },
 
   async asyncData ({ x, y, store }) {
     let popular;

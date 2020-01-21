@@ -85,6 +85,15 @@
       SearchBox
     },
 
+
+    head() {
+      let title = this.$route.params.location
+      return {
+        title: title[0].toUpperCase() + title.slice(1)
+      }
+    },
+
+
     async asyncData ({ params, redirect }) {
       let timeout = setTimeout(() => {
         redirect('/404');
