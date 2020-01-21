@@ -4,7 +4,7 @@
       <nuxt-link to="/"><Logo fontSize='1.5em'/></nuxt-link>
       <div class="menu-list" ref="menuList" v-click-outside="closeMenu">
         <nuxt-link class="menu-item" to="/" @click.native="closeMenu">Home</nuxt-link>
-        <nuxt-link class="menu-item" to="/" @click.native="closeMenu">About Us</nuxt-link>
+        <nuxt-link class="menu-item" to="/about" @click.native="closeMenu">About Us</nuxt-link>
         <nuxt-link class="menu-item" to="" @click.native="$modal.show('missing')">Send feedback</nuxt-link>
       </div>
       <div class="burger" :class="{'burger-is-opened': burgerIsOpened}" @click="toggleMenu">
