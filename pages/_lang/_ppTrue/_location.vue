@@ -44,6 +44,13 @@
     <section class="search-section">
       <div class="content">
         <div class="map">
+          <div class="hotels-gradient">
+            <div class="text">
+              <span>Popular</span>
+              <span>Not recommended</span>
+            </div>
+            <div class="line"></div>
+          </div>
           <Map :hotels="fetchData.hotels" :center="fetchData.gps.split(',')" :zoom="12"/>
         </div>
 
@@ -360,7 +367,31 @@
       height: 650px;
       width: 100%;    
       margin-bottom: 50px;
+      position: relative;
+      .hotels-gradient {
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+        width: 300px;
+        z-index: 2000;
+        background-color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 0 3px 0px #00000040;
+
+        .text {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        }
+
+        .line {
+          height: 30px;
+          background: linear-gradient(90deg, rgba(20,218,136,.8) 0%, rgba(250,247,0,.8) 47%, rgba(247,3,3,.8) 100%);
+        }
+      }
     }
+
     .refine-search {
       * {
         width: fit-content;
@@ -436,6 +467,14 @@
       }
       .slider-sub {
         display: none;
+      }
+    }
+
+    .search-section {
+      .map .hotels-gradient {
+        right: 50%;
+        transform: translateX(50%);
+        max-width: 90%;
       }
     }
   }
