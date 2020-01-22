@@ -70,18 +70,12 @@
 
 
     created() {
-      let timeout = setTimeout(() => {
-        this.$router.push('/404')
-      }, 5500);
-
       axios.get(`${this.$store.state.apiDomain}/api/areas/t-${this.title}`)
         .then(response => {
           this.fetchData = response.data.data[0]
-          clearTimeout(timeout);
         })
         .catch(error => {
           this.$router.push('/404')
-          clearTimeout(timeout)
         })
     },
   }

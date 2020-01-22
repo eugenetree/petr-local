@@ -20,12 +20,12 @@
       </div>
     </section>
     
-    <Preloader class="preloader" v-if="!popular.length"/>
+    <Preloader class="preloader" v-if="fetchDataLoading"/>
 
-    <section class="popular-section" v-if="popular.length">
+    <section class="popular-section" v-if="!fetchDataLoading">
       <div class="content">
         <h3>Popular searches</h3>
-        <Grid :gridList="popular" />
+        <Grid :gridList="fetchData" />
       </div>
     </section>
   </div>
@@ -55,13 +55,16 @@ export default {
 
   data() {
     return {
-      popular: []      
+      fetchData: [],
+      fetchDataLoading: true
     }
   },
 
 
   created() {
-    axios.get(`${this.$store.state.apiDomain}/api/autocomplete/popular`).then(response => this.popular = response.data.data);
+    axios.get(`${this.$store.state.apiDomain}/api/autocomplete/popular`)
+      .then(response => this.fetchData = response.data.data)
+      .finally(() => this.fetchDataLoading = false)
   },
 }
 </script>

@@ -156,7 +156,6 @@
       },
 
       sliderReload() {
-        console.log('slider reloading')
         this.$refs['slider-sub'].reSlick();
       },
 
@@ -197,21 +196,17 @@
     },
 
     async mounted() {
-      let timeout = setTimeout(() => {
-        this.$router.push('/404')
-      }, 5500);
-
       await axios.get(`https://safelocationapi.azurewebsites.net/api/PortalPage/t-${this.$route.params.location}`)
         .then(response => {
           this.fetchData = response.data
           this.fetchData.pageText = this.fetchData.pageText.replace(/<img[^>]*>/g,"");
           this.fetchDataLoading = false;
-          clearTimeout(timeout)
         })
         .catch(error => {
           this.$router.push('/404')
-          clearTimeout(timeout)
         })
+
+      if (!this.fetchData.areas) return;
 
       this.imagesLoad(this.fetchData.images);
       this.sliderReload = this.debounce(this.sliderReload, 100);
