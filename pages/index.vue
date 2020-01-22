@@ -20,7 +20,7 @@
       </div>
     </section>
     
-    <Preloader class="preloader preloader-full-screen" v-if="fetchDataLoading"/>
+    <Preloader class="preloader" v-if="fetchDataLoading"/>
 
     <section class="popular-section" v-if="!fetchDataLoading">
       <div class="content">
