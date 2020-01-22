@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Preloader class="preloader" v-if="fetchDataLoading"/>
+    <Preloader class="preloader preloader-full-screen" v-if="fetchDataLoading"/>
     <section class="slider-map-section" v-if="!fetchDataLoading">
       <div class="content" v-if="!fetchDataLoading">
         <div class="route" v-html="fetchData.breadcrumb" />

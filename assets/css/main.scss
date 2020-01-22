@@ -82,6 +82,13 @@ img {
   }
 }
 
+.preloader-full-screen {
+  height: calc(100vh - 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 1350px) {
   .content {
     padding: $content-padding;
