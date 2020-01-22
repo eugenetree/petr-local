@@ -7,8 +7,8 @@
         <div class="flex">
           <div class="slider">
             <div class="slider-nav">
-              <div class="arrow left-arrow" @click="$refs['slider-main'].next()"></div>
-              <div class="arrow right-arrow" @click="$refs['slider-main'].prev()"></div>
+              <div class="arrow left-arrow" @click="$refs['slider-main'].prev()"></div>
+              <div class="arrow right-arrow" @click="$refs['slider-main'].next()"></div>
             </div>
             <client-only>
               <slick-slide 
@@ -146,13 +146,6 @@
           loaded: false,
           isActive: false,
         },
-        images: [
-          require('@/assets/img/map/slide-1.png'),
-          require('@/assets/img/map/slide-2.png'),
-          require('@/assets/img/map/slide-3.png'),
-          require('@/assets/img/map/slide-4.png'),
-          require('@/assets/img/map/slide-5.png'),
-        ],
         coords: [
           {latLng: [47, -1]},
           {latLng: [47.2, -1]}

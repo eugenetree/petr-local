@@ -54,7 +54,6 @@
 
         let opacity = .5;
         if (type == 'border') opacity = 1;
-        console.log(`hsl(${hue}, 60%, 50%, ${opacity}`)
         return `hsl(${hue}, 60%, 50%, ${opacity}`;
       }
     },

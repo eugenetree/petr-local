@@ -2,13 +2,13 @@
   <div>
     <section class="safety-section">
       <div class="content">
-        <h1 class="title">Safety by {{ fetchData.name }}</h1>
+        <h1 class="title">Safety by {{ title }}</h1>
         <span class="hint">Pick a location to search for (un)safe hotspots</span>
+        <Preloader v-if="fetchDataLoading"/>
         <div class="grid-wrapper">
           <Grid :gridList="fetchData.relatedAresas" />
         </div>
-        <!-- <h2 class="info-title">Odstavec textu</h2> -->
-        <div class="info-desc" v-html="fetchData.areaText" />
+        <div class="info-desc" :style="{paddingBottom: fetchDataLoading ? '0' : '175px'}" v-html="fetchData.areaText" />
       </div>
       <div class="exact-location">
         <div class="bg-img overlay">
@@ -26,20 +26,21 @@
 <script>
   import Grid from '@/components/Grid.vue'
   import SearchBox from '@/components/SearchBox.vue'
+  import Preloader from '@/components/Preloader.vue'
 
   import axios from 'axios'
 
   export default {
     components: {
       Grid,
-      SearchBox
+      SearchBox,
+      Preloader
     },
 
 
     head() {
-      let title = this.$route.params.ppFalse.slice(5)
       return {
-        title: title[0].toUpperCase() + title.slice(1)
+        title: this.title
       }
     },
 
@@ -49,29 +50,65 @@
     },
 
 
-    async asyncData({ params, store, redirect }) {
+    data() {
+      return {
+        fetchData: {}
+      }
+    },
+
+
+    computed: {
+      title() {
+        let title = this.$route.params.ppFalse.slice(5)
+        return title[0].toUpperCase() + title.slice(1)
+      },
+
+      fetchDataLoading() {
+        return !Object.keys(this.fetchData).length
+      }
+    },
+
+
+    created() {
       let timeout = setTimeout(() => {
-        redirect('/404');
-        source.cancel();
+        this.$router.push('/404')
       }, 8000);
 
-      const CancelToken = axios.CancelToken;
-      const source = CancelToken.source();
-
-      let fetchData = {};
-
-      await axios.get(`${store.state.apiDomain}/api/areas/t-${params.ppFalse.slice(5)}`, {cancelToken: source.token})
+      axios.get(`${this.$store.state.apiDomain}/api/areas/t-${this.title}`)
         .then(response => {
-          fetchData = response.data.data[0]
+          this.fetchData = response.data.data[0]
           clearTimeout(timeout);
         })
         .catch(error => {
-          redirect('/404'); 
+          this.$router.push('/404')
           clearTimeout(timeout)
         })
-
-      return { fetchData }
     },
+
+
+    // async asyncData({ params, store, redirect }) {
+    //   let timeout = setTimeout(() => {
+    //     redirect('/404');
+    //     source.cancel();
+    //   }, 8000);
+
+    //   const CancelToken = axios.CancelToken;
+    //   const source = CancelToken.source();
+
+    //   let fetchData = {};
+
+    //   await axios.get(`${store.state.apiDomain}/api/areas/t-${params.ppFalse.slice(5)}`, {cancelToken: source.token})
+    //     .then(response => {
+    //       fetchData = response.data.data[0]
+    //       clearTimeout(timeout);
+    //     })
+    //     .catch(error => {
+    //       redirect('/404'); 
+    //       clearTimeout(timeout)
+    //     })
+
+    //   return { fetchData }
+    // },
   }
 </script>
 
@@ -105,7 +142,7 @@
     }
     .info-desc {
       line-height: 1.75em;
-      padding-bottom: 175px;
+      // padding-bottom: 175px;
       &::v-deep a {
         color: $green;
         text-decoration: underline;
