@@ -19,8 +19,10 @@
         </div>
       </div>
     </section>
+    
+    <Preloader class="preloader" v-if="!popular.length"/>
 
-    <section class="popular-section">
+    <section class="popular-section" v-if="popular.length">
       <div class="content">
         <h3>Popular searches</h3>
         <Grid :gridList="popular" />
@@ -30,15 +32,19 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import SearchBox from '@/components/SearchBox.vue'
 import Grid from '@/components/Grid.vue'
-import axios from 'axios'
+import Preloader from '@/components/Preloader.vue'
 
 export default {
   components: {
     SearchBox,
-    Grid
+    Grid,
+    Preloader
   },
+
 
   head() {
     return {
@@ -46,15 +52,25 @@ export default {
     }
   },
 
-  async asyncData ({ x, y, store }) {
-    let popular;
-    await axios.get(`${store.state.apiDomain}/api/autocomplete/popular`).then(response => popular = response.data.data);
-    return { popular }
+
+  data() {
+    return {
+      popular: []      
+    }
+  },
+
+
+  created() {
+    axios.get(`${this.$store.state.apiDomain}/api/autocomplete/popular`).then(response => this.popular = response.data.data);
   },
 }
 </script>
 
 <style lang="scss" scoped>
+  .preloader {
+    margin-bottom: 4em;
+  }
+
   .search-section {
     height: calc(100vh - #{$navbar-height});
     max-height: 700px;

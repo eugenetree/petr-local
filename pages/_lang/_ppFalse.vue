@@ -72,7 +72,7 @@
     created() {
       let timeout = setTimeout(() => {
         this.$router.push('/404')
-      }, 8000);
+      }, 5500);
 
       axios.get(`${this.$store.state.apiDomain}/api/areas/t-${this.title}`)
         .then(response => {
@@ -84,31 +84,6 @@
           clearTimeout(timeout)
         })
     },
-
-
-    // async asyncData({ params, store, redirect }) {
-    //   let timeout = setTimeout(() => {
-    //     redirect('/404');
-    //     source.cancel();
-    //   }, 8000);
-
-    //   const CancelToken = axios.CancelToken;
-    //   const source = CancelToken.source();
-
-    //   let fetchData = {};
-
-    //   await axios.get(`${store.state.apiDomain}/api/areas/t-${params.ppFalse.slice(5)}`, {cancelToken: source.token})
-    //     .then(response => {
-    //       fetchData = response.data.data[0]
-    //       clearTimeout(timeout);
-    //     })
-    //     .catch(error => {
-    //       redirect('/404'); 
-    //       clearTimeout(timeout)
-    //     })
-
-    //   return { fetchData }
-    // },
   }
 </script>
 

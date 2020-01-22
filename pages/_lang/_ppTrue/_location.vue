@@ -1,11 +1,12 @@
 <template>
   <div>
-    <section class="slider-map-section">
-      <div class="content">
+    <Preloader class="preloader" v-if="fetchDataLoading"/>
+    <section class="slider-map-section" v-if="!fetchDataLoading">
+      <div class="content" v-if="!fetchDataLoading">
         <div class="route" v-html="fetchData.breadcrumb" />
         <h1 class="title">How safe is Cyprus</h1>
         <div class="flex">
-          <div class="slider">
+          <div v-if="fetchData.images.length" class="slider">
             <div class="slider-nav">
               <div class="arrow left-arrow" @click="$refs['slider-main'].prev()"></div>
               <div class="arrow right-arrow" @click="$refs['slider-main'].next()"></div>
@@ -34,14 +35,14 @@
       </div>
     </section>
 
-    <section class="text-section">
+    <section class="text-section" v-if="!fetchDataLoading">
       <div class="content">
         <h2 class="title">How safe is Cyprus</h2>
         <div v-html="fetchData.pageText"></div>
       </div>
     </section>
 
-    <section class="search-section">
+    <section class="search-section" v-if="!fetchDataLoading">
       <div class="content">
         <div class="map">
           <div class="hotels-gradient">
@@ -85,11 +86,13 @@
 
   import Map from '@/components/map/Map.vue'
   import SearchBox from '@/components/SearchBox.vue'
+  import Preloader from '@/components/Preloader.vue'
 
   export default {
     components: {
       Map,
-      SearchBox
+      SearchBox,
+      Preloader
     },
 
 
@@ -101,33 +104,13 @@
     },
 
 
-    async asyncData ({ params, redirect }) {
-      let timeout = setTimeout(() => {
-        redirect('/404');
-        source.cancel();
-      }, 8000);
-
-      const CancelToken = axios.CancelToken;
-      const source = CancelToken.source();
-
-      let fetchData = {};
-
-      await axios.get(`https://safelocationapi.azurewebsites.net/api/PortalPage/t-${params.location}`, {cancelToken: source.token})
-        .then(response => {
-          fetchData = response.data
-          fetchData.pageText = fetchData.pageText.replace(/<img[^>]*>/g,"");
-          clearTimeout(timeout)
-        })
-        .catch(error => {
-          redirect('/404');
-          clearTimeout(timeout)
-        })
-
-      return { fetchData }
-    },
-
     data() {
       return {
+        fetchData: {
+          gps: '0,0',
+          images: []
+        },
+        fetchDataLoading: true,
         sliderSetPosCounter: 0,
         sliderResizeTimeout: null,
         sliderImagesLoad: 0,
@@ -173,6 +156,7 @@
       },
 
       sliderReload() {
+        console.log('slider reloading')
         this.$refs['slider-sub'].reSlick();
       },
 
@@ -212,21 +196,35 @@
       }
     },
 
-    async created() {
+    async mounted() {
+      let timeout = setTimeout(() => {
+        this.$router.push('/404')
+      }, 5500);
+
+      await axios.get(`https://safelocationapi.azurewebsites.net/api/PortalPage/t-${this.$route.params.location}`)
+        .then(response => {
+          this.fetchData = response.data
+          this.fetchData.pageText = this.fetchData.pageText.replace(/<img[^>]*>/g,"");
+          this.fetchDataLoading = false;
+          clearTimeout(timeout)
+        })
+        .catch(error => {
+          this.$router.push('/404')
+          clearTimeout(timeout)
+        })
+
+      this.imagesLoad(this.fetchData.images);
+      this.sliderReload = this.debounce(this.sliderReload, 100);
+      window.addEventListener('resize', this.sliderReload);
+
       this.fetchData.areas.forEach(item => {
-        if (!this.subAreas[item.areaType]) this.subAreas[item.areaType] = []
+        if (!this.subAreas[item.areaType]) this.$set(this.subAreas, item.areaType, [])
 
         this.subAreas[item.areaType].push({
           name: item.name,
           areaType: item.areaType
         })
       })
-    },
-
-    mounted() {
-      this.imagesLoad(this.fetchData.images);
-      this.sliderReload = this.debounce(this.sliderReload, 100);
-      window.addEventListener('resize', this.sliderReload);
     },
 
 
@@ -239,6 +237,10 @@
 <style lang="scss" scoped>
   #map-wrap {
     height: 100vh;
+  }
+
+  .preloader {
+    padding: 50px;
   }
 </style>
 
