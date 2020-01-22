@@ -83,7 +83,7 @@
 
 <style lang="scss" scoped>
   .safety-section {
-    margin-top: 80px;
+    padding-top: 80px;
     color: $dark;
     .title {
       margin-bottom: 10px;

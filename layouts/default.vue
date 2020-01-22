@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar/>
-    <Nuxt/>
+      <Nuxt class="default-wrapper" />
     <Footer/>
     <MissingModal/>
   </div>
@@ -26,4 +26,8 @@
 
 <style lang="scss" scoped>
   @import "@/assets/css/main.scss";
+
+  .default-wrapper {
+    min-height: calc(100vh - 150px);
+  }
 </style>
