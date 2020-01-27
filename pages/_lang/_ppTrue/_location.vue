@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Preloader class="preloader preloader-full-screen" v-if="fetchDataLoading"/>
-    <section class="slider-map-section" v-if="!fetchDataLoading">
-      <div class="content" v-if="!fetchDataLoading">
+    <!-- <Preloader class="preloader preloader-full-screen" /> -->
+    <section class="slider-map-section" >
+      <div class="content" >
         <div class="route" v-html="fetchData.breadcrumb" />
         <h1 class="title">How safe is Cyprus</h1>
         <div class="flex">
@@ -35,14 +35,14 @@
       </div>
     </section>
 
-    <section class="text-section" v-if="!fetchDataLoading">
+    <section class="text-section" >
       <div class="content">
-        <h2 class="title">How safe is Cyprus</h2>
+        <h2 class="title" :style="{textAlign: fetchDataLoading ? 'center' : 'left'}">How safe is Cyprus</h2>
         <div v-html="fetchData.pageText"></div>
       </div>
     </section>
 
-    <section class="search-section" v-if="!fetchDataLoading">
+    <section class="search-section" >
       <div class="content">
         <div class="map">
           <div class="hotels-gradient">
@@ -271,6 +271,10 @@
         margin-bottom: 2rem;
       }
 
+      .flex {
+        background-color: #dedede;
+      }
+
       .route {
         font-size: 14px; 
         color: #888888; 
@@ -329,6 +333,7 @@
       .map {
         width: 40%;
         height: 460px;
+        margin-left: auto;
       }
     }
   }
