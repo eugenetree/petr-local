@@ -273,6 +273,7 @@
 
       .flex {
         background-color: #dedede;
+        min-height: 250px;
       }
 
       .route {
