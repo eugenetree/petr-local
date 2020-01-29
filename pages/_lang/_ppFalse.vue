@@ -2,7 +2,7 @@
   <div>
     <section class="safety-section">
       <div class="content">
-        <h1 class="title">Safety by {{ title }}</h1>
+        <h1 class="title">Safety by {{ fetchData.name || '···' }}</h1>
         <span class="hint">Pick a location to search for (un)safe hotspots</span>
         <Preloader v-if="fetchDataLoading"/>
         <div class="grid-wrapper">

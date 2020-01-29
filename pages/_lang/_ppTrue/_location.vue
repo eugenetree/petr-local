@@ -4,7 +4,7 @@
     <section class="slider-map-section" >
       <div class="content" >
         <div class="route" v-html="fetchData.breadcrumb" />
-        <h1 class="title">How safe is {{$route.params.location[0].toUpperCase() + $route.params.location.slice(1)}}</h1>
+        <h1 class="title">{{ fetchData.name || '···' }}</h1>
         <div class="flex">
           <div v-if="fetchData.images.length" class="slider">
             <div class="slider-nav">
@@ -37,7 +37,7 @@
 
     <section class="text-section" >
       <div class="content">
-        <h2 class="title" :style="{textAlign: fetchDataLoading ? 'center' : 'left'}">How safe is {{$route.params.location[0].toUpperCase() + $route.params.location.slice(1)}}</h2>
+        <h2 class="title" :style="{textAlign: fetchDataLoading ? 'center' : 'left'}">{{ fetchData.name || '···' }}</h2>
         <div v-html="fetchData.pageText"></div>
       </div>
     </section>
@@ -58,7 +58,7 @@
         <div class="refine-search">
           <h3>Refine search by 
             <span class="green" v-for="(value, name, index) in subAreas" :key="index">{{ name }} <span v-if="Object.keys(subAreas).length != index + 1">and </span> </span>  
-          in {{ $route.params.location[0].toUpperCase() + $route.params.location.slice(1) }}</h3>
+          in {{ locationName }}</h3>
 
           <div class="sub-areas" v-for="(value, name, index) in subAreas" :key="index">
             <h5>{{ name }}</h5>
@@ -134,6 +134,17 @@
           {latLng: [47.2, -1]}
         ],
         subAreas: {},
+      }
+    },
+
+
+    computed: {
+      locationName() {
+        if (this.fetchData.name) {
+          let temp = this.fetchData.name.split(' ')
+          console.log(temp)
+          return temp[temp.length-1].slice(0, -1)
+        } else return '···'
       }
     },
 
