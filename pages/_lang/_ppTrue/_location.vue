@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- <Preloader class="preloader preloader-full-screen" /> -->
-    <section class="slider-map-section" >
+    <Preloader v-if="fetchDataLoading" class="preloader preloader-full-screen" />
+    <section v-if="!fetchDataLoading" class="slider-map-section" >
       <div class="content" >
         <div class="route" v-html="fetchData.breadcrumb" />
         <h1 class="title">{{ fetchData.name || '···' }}</h1>
@@ -35,14 +35,14 @@
       </div>
     </section>
 
-    <section class="text-section" >
+    <section v-if="!fetchDataLoading" class="text-section" >
       <div class="content">
         <h2 class="title" :style="{textAlign: fetchDataLoading ? 'center' : 'left'}">{{ fetchData.name || '···' }}</h2>
         <div v-html="fetchData.pageText"></div>
       </div>
     </section>
 
-    <section class="search-section" >
+    <section v-if="!fetchDataLoading" class="search-section" >
       <div class="content">
         <div class="map">
           <div class="hotels-gradient">
