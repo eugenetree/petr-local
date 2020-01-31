@@ -52,7 +52,7 @@
             </div>
             <div class="line"></div>
           </div>
-          <Map :hotels="fetchData.hotels" :center="fetchData.gps.split(',')" :zoom="12"/>
+          <Map ref="mainMap" :hotels="hotels" :center="fetchData.gps.split(',')" :zoom="12"/>
         </div>
 
         <div class="refine-search">
@@ -106,11 +106,13 @@
 
     data() {
       return {
+        hotels: [],
         fetchData: {
           gps: '0,0',
           images: []
         },
         fetchDataLoading: true,
+        fetchDataLoadedDate: null,
         sliderSetPosCounter: 0,
         sliderResizeTimeout: null,
         sliderImagesLoad: 0,
@@ -142,10 +144,9 @@
       locationName() {
         if (this.fetchData.name) {
           let temp = this.fetchData.name.split(' ')
-          console.log(temp)
           return temp[temp.length-1].slice(0, -1)
         } else return '···'
-      }
+      },
     },
 
 
@@ -196,6 +197,15 @@
 
       imgClickHandler(e) {
         if (!this.sliderSubOpt.loaded) e.stopPropagation();
+      },
+
+      setMapObserver() {
+        let observer = new IntersectionObserver(() => {
+          if (new Date() - this.fetchDataLoadedDate < 1000) return;
+          if (!this.hotels.length) this.hotels = this.fetchData.hotels;
+        });
+
+        observer.observe(this.$refs.mainMap.$el)
       }
     },
    
@@ -216,7 +226,10 @@
         .catch(error => {
           this.$router.push('/404')
         })
+      this.fetchDataLoadedDate = new Date()
 
+
+      this.setMapObserver();
       if (!this.fetchData.areas) return;
 
       this.imagesLoad(this.fetchData.images);
