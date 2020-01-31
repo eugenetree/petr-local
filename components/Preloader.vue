@@ -1,16 +1,20 @@
 <template>
   <div class="wrapper">
-    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    <div class="lds-ellipsis" :class="{white: color}"><div></div><div></div><div></div><div></div></div>
   </div>
 </template>
 
 <script>
 export default {
-
+  props: ['color']
 }
 </script>
 
 <style lang="scss">
+  .wrapper .white div {
+    background: white;
+  }
+
   .lds-ellipsis {
     display: inline-block;
     position: relative;

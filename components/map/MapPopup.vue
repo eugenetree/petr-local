@@ -21,6 +21,10 @@
 
     components: {
       Rating
+    },
+
+    mounted() {
+      this.$store.commit('incrementHotels')
     }
   }
 </script>

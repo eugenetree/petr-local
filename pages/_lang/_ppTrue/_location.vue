@@ -53,6 +53,9 @@
             <div class="line"></div>
           </div>
           <Map ref="mainMap" :hotels="hotels" :center="fetchData.gps.split(',')" :zoom="12"/>
+          <div v-if="mainMapLoading" class="map-preloader">
+            <Preloader color="white" />
+          </div>
         </div>
 
         <div class="refine-search">
@@ -111,6 +114,7 @@
           gps: '0,0',
           images: []
         },
+        mainMapLoading: true,
         fetchDataLoading: true,
         fetchDataLoadedDate: null,
         sliderSetPosCounter: 0,
@@ -147,6 +151,10 @@
           return temp[temp.length-1].slice(0, -1)
         } else return '···'
       },
+
+      hotelsCounter() {
+        return this.$store.state.hotelsCounter
+      }
     },
 
 
@@ -201,8 +209,11 @@
 
       setMapObserver() {
         let observer = new IntersectionObserver(() => {
-          if (new Date() - this.fetchDataLoadedDate < 1000) return;
-          if (!this.hotels.length) this.hotels = this.fetchData.hotels;
+          if (new Date() - this.fetchDataLoadedDate < 500) return;
+          if (!this.hotels.length) {
+            this.hotels = this.fetchData.hotels;
+            this.mainMapLoading = true;
+          }
         });
 
         observer.observe(this.$refs.mainMap.$el)
@@ -213,7 +224,13 @@
     watch: {
       sliderImagesLoad(newVal) {
         if (newVal == this.fetchData.images.length) setTimeout(() => this.sliderSubOpt.loaded = true, 500);
-      }
+      },
+
+      hotelsCounter(next, prev) {
+        if (next == this.hotels.length) {
+          this.mainMapLoading = false;
+        }
+      },
     },
 
     async mounted() {
@@ -226,10 +243,12 @@
         .catch(error => {
           this.$router.push('/404')
         })
+
       this.fetchDataLoadedDate = new Date()
 
 
       this.setMapObserver();
+
       if (!this.fetchData.areas) return;
 
       this.imagesLoad(this.fetchData.images);
@@ -359,6 +378,7 @@
         width: 40%;
         height: 460px;
         margin-left: auto;
+        position: relative;
       }
     }
   }
@@ -527,5 +547,18 @@
         }
       }
     }
+  }
+
+  .map-preloader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.411);
+    z-index: 2001;
   }
 </style>
